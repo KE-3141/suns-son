@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  /* Primary — Sky Blue (#29ABE2・親しみやすさ・グローバル） */
+  --color-primary-50:  #eaf6fd;
+  --color-primary-100: #d0ecf9;
+  --color-primary-200: #9dd6f3;
+  --color-primary-300: #62bceb;
+  --color-primary-400: #29abe2;
+  --color-primary-500: #1a96cc;
+  --color-primary-600: #1480af;
+  --color-primary-700: #106a91;
+  --color-primary-800: #0c5473;
+  --color-primary-900: #083d55;
+  --color-primary-950: #042537;
+
+  /* Secondary — Blue Gray（#b5ccda を中間・信頼・落ち着き） */
+  --color-secondary-50:  #f6f9fb;
+  --color-secondary-100: #eff4f7;
+  --color-secondary-200: #e3ecf1;
+  --color-secondary-300: #d9e4ec;
+  --color-secondary-400: #b5ccda;
+  --color-secondary-500: #93a8b5;
+  --color-secondary-600: #748793;
+  --color-secondary-700: #5b6d79;
+  --color-secondary-800: #455661;
+  --color-secondary-900: #303f4a;
+  --color-secondary-950: #23323c;
+
+  /* Neutral — Gray */
+  --color-neutral-50:  #f6f7f8;
+  --color-neutral-100: #ebedf0;
+  --color-neutral-200: #d3d7dc;
+  --color-neutral-300: #b0b7bf;
+  --color-neutral-400: #8a939e;
+  --color-neutral-500: #6b7583;
+  --color-neutral-600: #545e6b;
+  --color-neutral-700: #434b57;
+  --color-neutral-800: #383f49;
+  --color-neutral-900: #31363f;
+  --color-neutral-950: #1e2229;
+
+  /* Base — Very Light Blue（= primary-50） */
+  --color-base: #eaf6fd;
+
+  /* Typography */
+  --font-sans:
+    'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    'Yu Gothic', 'Meiryo', sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-neutral-700);
+  background-color: #fff;
+  line-height: 1.7;
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-primary-50);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-400);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-600);
+}

@@ -45,9 +45,9 @@ const companyRows = [
                via-white/25 via-[68%] to-transparent md:from-[40%] md:via-[62%]"
       />
 
-      <!-- ヒーローイラスト（rajan.svg）：右半分の中央（テキストより手前）＋足元シャドウ -->
+      <!-- ヒーローイラスト（rajan.svg）：右半分の中央（テキストより手前）＋足元シャドウ / デスクトップのみ表示 -->
       <div
-        class="pointer-events-none absolute inset-y-0 left-1/2 right-0 z-20 flex items-center justify-center px-2 sm:px-4"
+        class="pointer-events-none absolute inset-y-0 left-1/2 right-0 z-20 hidden md:flex items-center justify-center px-2 sm:px-4"
       >
         <div
           class="relative isolate flex shrink-0 flex-col items-center justify-center
@@ -69,6 +69,16 @@ const companyRows = [
 
       <!-- コンテンツ：左にコピー -->
       <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <!-- モバイル：SVGをテキストより上に表示 -->
+        <div class="md:hidden flex justify-center mb-8">
+          <img
+            :src="rajanUrl"
+            alt="代表者イラスト"
+            class="h-56 w-auto drop-shadow-lg"
+            fetchpriority="high"
+            loading="eager"
+          />
+        </div>
         <div class="max-w-2xl text-left">
             <!-- メインキャッチコピー -->
             <div class="mb-6 max-w-2xl">

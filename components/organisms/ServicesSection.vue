@@ -20,9 +20,10 @@ const { services } = useSiteContent()
           :label="service.label"
           :title="service.title"
           :description="service.description"
-          :items="service.features"
           :image-src="service.imageSrc"
           :image-alt="service.imageAlt"
+          :to="service.to ?? ''"
+          :link-text="service.linkText ?? ''"
         />
       </div>
     </div>

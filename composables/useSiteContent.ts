@@ -12,7 +12,7 @@ export const useSiteContent = () => {
     nameEn: "Sun's Son Co., Ltd.",
     tagline: '「教育」×「紹介」×「サポート」で日本をもっと元気に。',
     description:
-      "Sun's Son株式会社は、ネパール人人材の教育・紹介・就労後サポートを一貫して提供する人材紹介会社です。日本語ネイティブのネパール人講師による高水準な教育、独自の会話面接による厳選、登録支援機関としての受け入れ手続き代行まで、企業様の外国人材採用をワンストップでお手伝いします。",
+      "Sun's Son株式会社は、ネパール人人材の教育・紹介・就労後サポートを一貫して提供する人材紹介会社です。",
     philosophy:
       "質の低い紹介業者によって、ネパール人も日本企業も困っている場面を数多く見てきました。言語を教えるだけでなく、日本社会で暮らしていくための倫理観や社会通念をしっかりと伝えることで、人の役に立てる人材を輩出する。そして彼らが安心して日本で生活していけるよう支援する。それがSun's Sonの理念です。",
     postalCode: '169-0073',
@@ -46,6 +46,8 @@ export const useSiteContent = () => {
       to: '/business/',
       children: [
         { label: '教育', to: '/education/' },
+        { label: '人材紹介', to: '/placement/' },
+        { label: 'アフターケア', to: '/aftercare/' },
       ],
     },
     { label: '企業理念', to: '/philosophy/' },
@@ -56,6 +58,9 @@ export const useSiteContent = () => {
   const footerNavItems = [
     { label: 'トップページ', to: '/' },
     { label: '事業内容', to: '/business/' },
+    { label: '教育', to: '/education/' },
+    { label: '人材紹介', to: '/placement/' },
+    { label: 'アフターケア', to: '/aftercare/' },
     { label: '企業理念', to: '/philosophy/' },
     { label: '会社概要', to: '/company/' },
     { label: 'お問い合わせ', to: '/contact/' },
@@ -70,19 +75,14 @@ export const useSiteContent = () => {
   const services = [
     {
       key: 'education',
-      title: '教育',
-      label: 'Education',
+      title: '日本語教育 × 特定技能教育',
+      label: 'Language & Skills',
       description:
         '日本語教育と特定技能教育のダブル体制。日本語ネイティブのネパール人講師がネパール語で指導し、日本人専門講師による特定技能授業を母語でフォロー。専門知識と社会マナーをあわせて習得させます。',
       imageSrc: '/images/class.png',
       imageAlt: '教育',
-      features: [
-        '日本語ネイティブのネパール人講師がネパール語で日本語指導',
-        '日本人専門講師による特定技能教育',
-        'ネパール人講師が専門用語をネパール語で補足解説',
-        '日本での就労経験をもとにした社会マナー・労働倫理の指導',
-        '独自の会話面接で日本語実力を確認済みの人材のみを紹介',
-      ],
+      to: '/education/',
+      linkText: '教育の詳細はこちら',
     },
     {
       key: 'placement',
@@ -92,13 +92,8 @@ export const useSiteContent = () => {
         '求人条件のヒアリングから選考サポートまで一貫対応。日本語力・専門知識・社会マナーを備えた即戦力人材を丁寧にご紹介します。',
       imageSrc: '/images/placement.png',
       imageAlt: '人材紹介',
-      features: [
-        '求人条件のヒアリング',
-        '条件に合致する人材の情報提供',
-        'JLPT等級に加え独自の会話面接で日本語実力を確認',
-        '選考テストの代行（要相談）',
-        '採用後、就労までのサポート',
-      ],
+      to: '/placement/',
+      linkText: '人材紹介の詳細はこちら',
     },
     {
       key: 'aftercare',
@@ -106,13 +101,8 @@ export const useSiteContent = () => {
       label: 'Aftercare',
       description:
         '登録支援機関として、特定技能生の就労後サポートを法令に基づき提供。海外からの受け入れに必要な手続きも全て対応。生活相談・学習支援まで継続的に寄り添い、定着率向上をお手伝いします。',
-      features: [
-        '登録支援機関として特定技能生を法的にサポート',
-        '海外からの受け入れに必要な手続きを全て代行',
-        '就労後の生活相談・行政手続き支援',
-        '希望者への継続的な学習支援',
-        '就労者への教育代行（要相談）',
-      ],
+      to: '/aftercare/',
+      linkText: 'アフターケアの詳細はこちら',
     },
     {
       key: 'sharehouse',
@@ -120,12 +110,6 @@ export const useSiteContent = () => {
       label: 'Share House',
       description:
         'ネパール人専用のシェアハウスを東京都内で運営（順次拡大予定）。来日直後の住居探しの負担を軽減し、生活基盤を早期に安定させることで職場への定着を支援します。',
-      features: [
-        '東京都内でネパール人専用シェアハウスを運営',
-        '来日直後の住居探しの手間を解消',
-        '同じ境遇の仲間とのコミュニティで生活を安定化',
-        '順次エリア拡大予定',
-      ],
     },
   ]
 
@@ -225,20 +209,21 @@ export const useSiteContent = () => {
       title: '「N3と聞いていたのに…」をなくす独自選考',
       shortDescription:
         'JLPT等級だけでなく、弊社独自の会話面接で受け答えのレベルを確認。実際に話せると証明された人材のみをご紹介します。日本語ネイティブのネパール人講師による母語指導が、高い教育水準を支えています。',
-      to: '/business/',
+      to: '/placement/',
     },
     {
       key: 'one-stop',
       title: '海外からの受け入れ手続き、まるごとお任せ',
       shortDescription:
         '登録支援機関として、特定技能生の受け入れに必要な手続きを全て代行。書類準備から行政対応まで、企業様の負担を最小限に抑えます。',
-      to: '/business/',
+      to: '/aftercare/',
     },
     {
       key: 'retention',
       title: '採用後も寄り添い、定着率を高める',
       shortDescription:
         '就労後の生活相談・行政手続き支援・継続学習サポートを提供。住居はシェアハウスで確保。教育・紹介・定着まで一貫してお手伝いします。',
+      to: '/aftercare/',
     },
   ]
 
@@ -440,12 +425,52 @@ export const useSiteContent = () => {
     '基礎工事',
   ]
 
+  // ─────────────────────────────────────────
+  // アフターケアページコンテンツ
+  // ─────────────────────────────────────────
+
+  /** サポート項目（就労前〜就労後） */
+  const supportItems = [
+    {
+      phase: '就労前',
+      label: 'Pre-employment',
+      items: [
+        '特定技能ビザの取得手続き代行',
+        '入国・出迎えのサポート',
+        '住居の手配（シェアハウス提供）',
+        '銀行口座開設・生活インフラの整備サポート',
+        '入社前オリエンテーション（職場ルール・生活マナーの確認）',
+      ],
+    },
+    {
+      phase: '就労後',
+      label: 'Post-employment',
+      items: [
+        '生活上の相談窓口（体調不良・トラブル・ハラスメントなど）',
+        '役所手続き・行政書類の支援',
+        'ビザ更新・在留資格変更の手続き代行',
+        '定期面談による就労状況の確認',
+        '災害・緊急時の情報共有と対応サポート',
+      ],
+    },
+    {
+      phase: '継続学習',
+      label: 'Ongoing Education',
+      items: [
+        '希望者への日本語・特定技能の継続授業（要相談）',
+        'JLPT対策・スキルアップ支援',
+        '就労しながら受講できるオンラインクラスへの参加',
+      ],
+    },
+  ]
+
   return {
     company,
     navItems,
     footerNavItems,
     services,
     referralFlows,
+    supportItems,
     educationActivities,
     dualEducationFeatures,
     pillars,

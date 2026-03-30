@@ -50,7 +50,7 @@ const { educationActivities } = useSiteContent()
               to="https://www.tiktok.com/@_rajan_bhandari_"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2.5 text-neutral-800 font-bold text-base"
+              class="inline-flex items-center gap-2.5 text-primary-400 font-bold text-base"
               aria-label="TikTok @_rajan_bhandari_ を開く"
             >
               @_rajan_bhandari_の投稿を見てみる
@@ -62,32 +62,12 @@ const { educationActivities } = useSiteContent()
             <p class="text-neutral-600 text-base leading-relaxed mb-6">
               代表バンダーリ ラジャンが運営するTikTokアカウントでは、日本での就労・留学を目指すネパール人に向けたコンテンツをネパール語で発信しています。
             </p>
-            <ul class="space-y-3 text-sm text-neutral-700">
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                分かりにくい日本語単語の解説
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                日本の文化・マナー紹介
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                自然災害時の情報発信（台風など）
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                日本企業での面接のコツ
-              </li>
-            </ul>
+            <CheckList :items="[
+              '分かりにくい日本語単語の解説',
+              '日本の文化・マナー紹介',
+              '自然災害時の情報発信（台風など）',
+              '日本企業での面接のコツ',
+            ]" />
           </div>
         </div>
 
@@ -113,34 +93,14 @@ const { educationActivities } = useSiteContent()
           <!-- 左：説明＋数字 -->
           <div>
             <p class="text-neutral-600 text-base leading-relaxed mb-6">
-              UKARU Academyでは、日本での留学・就労を目指すネパール人向けに日本語教育を提供しています。JLPT（日本語能力試験）対策をメインに、会話力強化など実践的な日本語能力の向上を目標としています。
+              ネパールの教育法人「UKARU Academy」では、日本での留学・就労を目指すネパール人向けに日本語教育を提供しています。JLPT（日本語能力試験）対策をメインに、会話力強化など実践的な日本語能力の向上を目標としています。
             </p>
-            <ul class="space-y-3 text-sm text-neutral-700 mb-8">
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                初級から上級レベルまで幅広く対応
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                JLPT対策（N5〜N1）をメインカリキュラムに採用
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                会話力・実践的コミュニケーション力の強化
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                受講生の多くが日本での留学・就労を希望
-              </li>
-            </ul>
+            <CheckList class="mb-8" :items="[
+              '初級から上級レベルまで幅広く対応',
+              'JLPT対策（N5〜N1）をメインカリキュラムに採用',
+              '会話力・実践的コミュニケーション力の強化',
+              '受講生の多くが日本での留学・就労を希望',
+            ]" />
             <StatRow
               :stats="[
                 { value: 'N5〜N1', label: '対応JLPTレベル' },
@@ -183,32 +143,12 @@ const { educationActivities } = useSiteContent()
             <p class="text-neutral-600 text-base leading-relaxed mb-6">
               日本に在留しているネパール人向けに、オンラインクラスも開講しています。就労しながらでも学べる環境を整え、日本語力・実践的なコミュニケーション能力の底上げをサポートしています。
             </p>
-            <ul class="space-y-3 text-sm text-neutral-700 mb-8">
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                日本在留中に就労しながら受講可能
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                初級から上級まで対応
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                JLPT対策・会話力強化を並行してサポート
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 w-5 h-5 rounded bg-primary-400 flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-xs font-bold">✓</span>
-                </span>
-                入構希望者は今後も増加が見込まれる
-              </li>
-            </ul>
+            <CheckList class="mb-8" :items="[
+              '日本在留中に就労しながら受講可能',
+              '初級から上級まで対応',
+              'JLPT対策・会話力強化を並行してサポート',
+              '入構希望者は今後も増加が見込まれる',
+            ]" />
             <StatRow
               :stats="[
                 { value: '100+', unit: '名', label: '現在の受講者数' },

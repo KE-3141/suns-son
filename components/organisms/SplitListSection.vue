@@ -64,7 +64,7 @@ withDefaults(defineProps<Props>(), {
             class="mb-6"
           />
           <p
-            class="text-sm leading-relaxed max-w-xs mb-8"
+            class="text-base leading-relaxed max-w-xs mb-8"
             :class="theme === 'dark' ? 'text-white/80' : 'text-neutral-600'"
           >
             {{ description }}
@@ -73,7 +73,7 @@ withDefaults(defineProps<Props>(), {
             v-if="linkTo && linkText"
             :to="linkTo"
             :class="[
-              'inline-flex items-center font-semibold text-sm',
+              'inline-flex items-center font-semibold text-base',
               theme === 'dark'
                 ? 'text-white'
                 : 'text-primary-400 hover:text-primary-400 transition-colors',
@@ -109,7 +109,7 @@ withDefaults(defineProps<Props>(), {
                   {{ item.title }}
                 </p>
                 <p
-                  class="text-sm leading-relaxed"
+                  class="text-base leading-relaxed"
                   :class="theme === 'dark' ? 'text-white/80' : 'text-neutral-600'"
                 >
                   {{ item.shortDescription }}
@@ -136,7 +136,7 @@ withDefaults(defineProps<Props>(), {
                   {{ item.title }}
                 </p>
                 <p
-                  class="text-sm leading-relaxed"
+                  class="text-base leading-relaxed"
                   :class="theme === 'dark' ? 'text-white/80' : 'text-neutral-600'"
                 >
                   {{ item.shortDescription }}

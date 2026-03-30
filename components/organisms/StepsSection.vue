@@ -42,8 +42,8 @@ defineProps<Props>()
           </div>
           <!-- 内容 -->
           <div class="pt-3 pb-2">
-            <h3 class="text-lg font-black text-neutral-900 mb-2">{{ step.title }}</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">{{ step.description }}</p>
+            <h3 class="text-2xl font-black text-neutral-900 mb-2">{{ step.title }}</h3>
+            <p class="text-neutral-600 text-base leading-relaxed">{{ step.description }}</p>
           </div>
         </li>
       </ol>

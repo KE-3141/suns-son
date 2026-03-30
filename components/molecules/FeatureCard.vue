@@ -19,6 +19,6 @@ defineProps<{
       <slot name="icon" />
     </div>
     <h3 class="text-xl font-bold text-primary-400 mb-3 text-center">{{ title }}</h3>
-    <p class="text-neutral-600 text-sm leading-relaxed text-center">{{ description }}</p>
+    <p class="text-neutral-600 text-base leading-relaxed text-center">{{ description }}</p>
   </article>
 </template>

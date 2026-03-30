@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const worldMapUrl = usePublicUrl('/images/world_map.svg')
 const rajanUrl = usePublicUrl('/images/rajan.svg')
+const simpleLogoUrl = usePublicUrl('/images/simple_logo.svg')
 
 useHead({ title: "Sun's Son株式会社 | 外国人留学生ご紹介サービス" })
 useSeoMeta({
@@ -39,73 +40,47 @@ const companyRows = [
         />
       </div>
 
-      <!-- 左寄せコピー向けの可読性オーバーレイ（薄め） -->
-      <div
-        class="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-white/50 from-[48%]
-               via-white/25 via-[68%] to-transparent md:from-[40%] md:via-[62%]"
-      />
+      <!-- 可読性オーバーレイ -->
+      <div class="absolute inset-0 z-[1] pointer-events-none bg-white/40" />
 
-      <!-- ヒーローイラスト（rajan.svg）：右半分の中央（テキストより手前）＋足元シャドウ / デスクトップのみ表示 -->
-      <div
-        class="pointer-events-none absolute inset-y-0 left-1/2 right-0 z-20 hidden md:flex items-center justify-center px-2 sm:px-4"
-      >
+      <!-- コンテンツ：縦並び中央揃え -->
+      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-16 md:py-24 flex flex-col items-center text-center">
+        <!-- メインキャッチコピー -->
+        <div class="mb-6">
+          <h1 class="text-3xl md:text-4xl lg:text-[2.5rem] font-black leading-tight text-neutral-800">
+            「<span class="text-primary-400">教育</span>」×「<span class="text-primary-400">紹介</span>」×「<span class="text-primary-400">サポート</span>」で
+          </h1>
+          <p class="text-3xl md:text-4xl lg:text-[2.5rem] font-black leading-tight text-neutral-800 mt-2">
+            <span class="text-primary-400">日本</span>をもっと<span class="text-primary-400">元気</span>に。
+          </p>
+        </div>
+
+        <p class="text-neutral-600 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+          {{ company.description }}
+        </p>
+
+        <!-- CTAボタン -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <AppButton to="/contact/" size="lg">
+            お問い合わせはこちら
+            <IconArrow />
+          </AppButton>
+          <AppButton to="/business/" size="lg" variant="secondary">
+            事業内容を見る
+          </AppButton>
+        </div>
+
+        <!-- イラスト -->
         <div
-          class="relative isolate flex shrink-0 flex-col items-center justify-center
-                 after:pointer-events-none after:absolute after:left-1/2 after:bottom-10 after:z-0
-                 after:h-8 after:w-[72%] after:max-w-xs after:-translate-x-1/2 after:translate-y-1/3
-                 after:rounded-full after:bg-neutral-500/30 after:blur-xl after:content-['']
-                 after:shadow-[0_4px_14px_rgba(0,0,0,0.12)]
-                 sm:after:h-9 md:after:h-10 lg:after:h-12"
+          class="relative isolate flex shrink-0 flex-col items-center mt-10"
         >
           <img
             :src="rajanUrl"
             alt="代表者イラスト"
-            class="relative z-10 h-56 w-auto max-h-[70vh] max-w-full shrink-0 object-contain sm:h-72 md:h-80 lg:h-96 xl:h-[28rem]"
+            class="relative z-10 h-56 md:h-72 lg:h-80 w-auto object-contain"
             fetchpriority="high"
             loading="eager"
           />
-        </div>
-      </div>
-
-      <!-- コンテンツ：左にコピー -->
-      <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 md:py-24">
-        <!-- モバイル：SVGをテキストより上に表示 -->
-        <div class="md:hidden flex justify-center mb-8">
-          <img
-            :src="rajanUrl"
-            alt="代表者イラスト"
-            class="h-56 w-auto drop-shadow-lg"
-            fetchpriority="high"
-            loading="eager"
-          />
-        </div>
-        <div class="max-w-2xl text-left">
-            <!-- メインキャッチコピー -->
-            <div class="mb-6 max-w-2xl">
-              <h1 class="text-3xl md:text-4xl lg:text-[2.5rem] font-black leading-tight text-neutral-800">
-                「<span class="text-primary-400">教育</span>」×「<span class="text-primary-400">紹介</span>」×「<span class="text-primary-400">サポート</span>」で
-              </h1>
-              <p class="text-3xl md:text-4xl lg:text-[2.5rem] font-black leading-tight text-neutral-800 mt-2">
-                <span class="text-primary-400">日本</span>をもっと<span class="text-primary-400">元気</span>に。
-              </p>
-            </div>
-
-            <p
-              class="text-neutral-600 text-base md:text-lg leading-relaxed max-w-xl mb-8"
-            >
-              {{ company.description }}
-            </p>
-
-            <!-- CTAボタン -->
-            <div class="flex flex-col sm:flex-row gap-4">
-              <AppButton to="/contact/" size="lg">
-                お問い合わせはこちら
-                <IconArrow />
-              </AppButton>
-              <AppButton to="/business/" size="lg" variant="secondary">
-                事業内容を見る
-              </AppButton>
-            </div>
         </div>
       </div>
 

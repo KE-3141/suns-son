@@ -5,7 +5,7 @@ useSeoMeta({
     "Sun's Son株式会社は登録支援機関として、特定技能ビザの取得から就労後の生活相談・継続学習まで一貫してサポート。外国人採用に必要な手続きを全て代行します。",
 })
 
-const { supportItems } = useSiteContent()
+const { supportItems, company } = useSiteContent()
 </script>
 
 <template>
@@ -37,8 +37,8 @@ const { supportItems } = useSiteContent()
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
           </svg>
           <div>
-            <p class="text-xs text-neutral-500 mb-0.5">有料職業紹介事業許可番号</p>
-            <p class="font-bold text-neutral-800">13-ユ-317607</p>
+            <p class="text-xs text-neutral-500 mb-0.5">登録支援機関番号</p>
+            <p class="font-bold text-neutral-800">{{ company.licenseSupportOrg }}</p>
           </div>
         </div>
       </div>
@@ -114,23 +114,39 @@ const { supportItems } = useSiteContent()
         <SectionHeading label="Visa Support" class="mb-10">
           対応ビザ
         </SectionHeading>
-        <div class="bg-white rounded-2xl p-8 md:p-10">
-          <div class="flex items-start gap-4 mb-6">
+        <div class="space-y-4">
+          <!-- 特定技能 -->
+          <div class="bg-white rounded-2xl p-8 md:p-10 flex items-start gap-4">
             <div class="w-10 h-10 rounded-full bg-primary-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
               <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
               </svg>
             </div>
             <div>
-              <h3 class="font-black text-neutral-800 text-lg mb-2">特定技能ビザ（メイン対応）</h3>
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="font-black text-neutral-800 text-lg">特定技能ビザ</h3>
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-primary-400 text-white">メイン対応</span>
+              </div>
               <p class="text-neutral-600 text-sm leading-relaxed">
-                特定技能1号・2号の取得手続きを全て代行します。申請書類の準備から出入国在留管理局への申請、更新手続きまで対応。企業様・就労者様双方の負担を最小限に抑えます。
+                特定技能1号・2号の取得手続きを全て代行します。Sun's Sonが自ら教育した人材をご紹介するため、試験対策・スキル習得の状況を把握した上で申請に臨めます。書類準備から出入国在留管理局への申請・更新まで一貫対応。
               </p>
             </div>
           </div>
-          <p class="text-neutral-500 text-sm">
-            その他のビザについてはお問い合わせください。
-          </p>
+
+          <!-- 技術・人文知識・国際業務 -->
+          <div class="bg-white rounded-2xl p-8 md:p-10 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-black text-neutral-800 text-lg mb-2">技術・人文知識・国際業務ビザ</h3>
+              <p class="text-neutral-600 text-sm leading-relaxed">
+                エンジニア・事務・通訳など、専門的な知識や技術を活かして働く方向けのビザです。取得手続きの代行・必要書類の準備をサポートします。
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

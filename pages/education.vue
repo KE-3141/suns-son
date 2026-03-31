@@ -96,15 +96,14 @@ const { educationActivities } = useSiteContent()
               ネパールの教育法人「UKARU Academy」では、日本での留学・就労を目指すネパール人向けに日本語教育を提供しています。JLPT（日本語能力試験）対策をメインに、会話力強化など実践的な日本語能力の向上を目標としています。
             </p>
             <CheckList class="mb-8" :items="[
-              '初級から上級レベルまで幅広く対応',
-              'JLPT対策（N5〜N1）をメインカリキュラムに採用',
+              'JLPT対策（N5〜N3）をメインカリキュラムに採用',
               '会話力・実践的コミュニケーション力の強化',
               '受講生の多くが日本での留学・就労を希望',
             ]" />
             <StatRow
               :stats="[
-                { value: 'N5〜N1', label: '対応JLPTレベル' },
-                { value: '増加', unit: '中', label: '入構希望者数' },
+                { value: 'N5〜N3', label: '対応JLPTレベル' },
+                { value: '50', unit: '名', label: '現在の受講者数' },
               ]"
             />
           </div>
@@ -151,7 +150,7 @@ const { educationActivities } = useSiteContent()
             ]" />
             <StatRow
               :stats="[
-                { value: '100+', unit: '名', label: '現在の受講者数' },
+                { value: '2000+', unit: '名', label: '累計受講者数' },
               ]"
             />
           </div>

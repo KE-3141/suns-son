@@ -7,7 +7,7 @@ useSeoMeta({
 
 const placementImageUrl = usePublicUrl('/images/placement.png')
 
-const { referralFlows } = useSiteContent()
+const { referralFlows, company } = useSiteContent()
 
 const placementFeatures = [
   '求人条件（資格・日本語力・職種など）の詳細ヒアリング',
@@ -46,20 +46,44 @@ const industries = [
       '介護福祉士の専門講師が特定技能「介護」分野の授業を担当。実務に直結したカリキュラムで、即戦力となる介護人材を育成・輩出しています。',
   },
   {
+    key: 'food-service',
+    label: '外食業',
+    status: 'strong',
+    statusLabel: '希望者多数',
+    description:
+      '外食分野への就労を希望する生徒が多数在籍しています。人手不足が深刻な飲食業界に、意欲の高いネパール人人材をご紹介します。',
+  },
+  {
+    key: 'accommodation',
+    label: '宿泊',
+    status: 'track',
+    statusLabel: '英語対応可',
+    description:
+      'ネパールでは義務教育から英語で学ぶカリキュラムが主流です。英語を問題なく使える人材が多く、外国人ゲストの対応が求められる宿泊業に強みを発揮します。',
+  },
+  {
     key: 'agriculture',
     label: '農業',
     status: 'track',
     statusLabel: '紹介実績あり',
     description:
-      'ネパールは農業従事者の割合が高く、土や自然に慣れ親しんだ人材が豊富です。農業分野への就労を希望する候補者も多く、農業系企業様への紹介実績があります。',
+      'ネパールは農業従事者の割合が高く、土や自然に慣れ親しんだ人材が豊富です。農業系企業様への紹介実績があります。',
+  },
+  {
+    key: 'logistics',
+    label: '物流・倉庫',
+    status: 'preparing',
+    statusLabel: '2027年対応準備中',
+    description:
+      '倉庫・物流は2027年から特定技能の対象業種に追加される予定です。いち早く対応できるよう人材の育成・確保を進めています。制度開始に合わせてご紹介が可能になります。',
   },
   {
     key: 'construction',
-    label: '建築',
+    label: '建設',
     status: 'growing',
     statusLabel: '希望者増加中',
     description:
-      '建築分野を希望する生徒が増えています。ご興味のある企業様はぜひお気軽にご相談ください。',
+      '体力と規律に自信を持つネパール人退役軍人の生徒が複数在籍しており、建設分野への就労を強く希望しています。厳しい訓練で培った体力・精神力・チームワークは、現場での即戦力として期待できます。',
   },
 ]
 
@@ -67,6 +91,7 @@ const statusStyles: Record<string, string> = {
   strong: 'bg-primary-400 text-white',
   track: 'bg-secondary-300 text-neutral-700',
   growing: 'bg-neutral-100 text-neutral-500',
+  preparing: 'bg-amber-100 text-amber-700',
 }
 </script>
 
@@ -171,7 +196,22 @@ const statusStyles: Record<string, string> = {
       </div>
     </section>
 
-    <!-- ===== 6. 紹介までの流れ ===== -->
+    <!-- ===== 6. 許可番号 ===== -->
+    <section class="py-10 bg-white">
+      <div class="max-w-4xl mx-auto px-6 flex justify-center">
+        <div class="bg-[#eaf6fd] rounded-2xl px-8 py-6 inline-flex items-center gap-4">
+          <svg class="w-6 h-6 text-primary-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+          </svg>
+          <div>
+            <p class="text-xs text-neutral-500 mb-0.5">有料職業紹介事業許可番号</p>
+            <p class="font-bold text-neutral-800">{{ company.license }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. 紹介までの流れ ===== -->
     <StepsSection
       label="Deal Flow"
       title="人材紹介までの流れ"

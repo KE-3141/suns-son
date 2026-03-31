@@ -28,7 +28,8 @@ export const useSiteContent = () => {
     capital: '1,000万円',
     employees: '39',
     area: '関東',
-    license: '13-ユ-317607（有料職業紹介事業）',
+    license: '13-ユ-317607',
+    licenseSupportOrg: '25 登-012523',
     ceo: 'バンダーリ ラジャン',
     executive: '平山 勉',
     officeAddress: '東京都江東区北砂5-17-37 福原マンション1階',
@@ -50,6 +51,7 @@ export const useSiteContent = () => {
         { label: 'アフターケア', to: '/aftercare/' },
       ],
     },
+    { label: '実績紹介', to: '/cases/' },
     { label: '企業理念', to: '/philosophy/' },
     { label: '会社概要', to: '/company/' },
   ]
@@ -61,6 +63,7 @@ export const useSiteContent = () => {
     { label: '教育', to: '/education/' },
     { label: '人材紹介', to: '/placement/' },
     { label: 'アフターケア', to: '/aftercare/' },
+    { label: '実績紹介', to: '/cases/' },
     { label: '企業理念', to: '/philosophy/' },
     { label: '会社概要', to: '/company/' },
     { label: 'お問い合わせ', to: '/contact/' },
@@ -141,9 +144,9 @@ export const useSiteContent = () => {
     },
     {
       step: '05',
-      title: '試用期間の後、紹介料のお支払い',
+      title: '就労確定後、紹介料のお支払い',
       description:
-        '勤務態度・能力に問題なく雇用を継続できると判断された場合、紹介料をお支払いいただきます。',
+        'ビザの発行等、就労できることが確定したのち、紹介料をお支払いいただきます。',
     },
   ]
 
@@ -426,6 +429,83 @@ export const useSiteContent = () => {
   ]
 
   // ─────────────────────────────────────────
+  // 実績紹介ページコンテンツ
+  // ─────────────────────────────────────────
+
+  /** 企業事例（受入企業のケーススタディ） */
+  const caseStudies = [
+    {
+      key: 'company-accommodation',
+      industry: '宿泊',
+      industryEn: 'Accommodation',
+      challenge: '外国人ゲストへの対応と日常業務を両立できる人材の確保が難しかった',
+      solution: '英語・日本語に対応できるネパール人スタッフをご紹介',
+      result: '現在も継続就労中',
+      comment: '紹介前に学習状況や性格まで詳しく説明していただけたので、採用をとても安心して決めることができました。入社後も日本語が堪能で、外国人ゲストとのやり取りもスムーズです。',
+      commentAuthor: '人事担当者',
+    },
+    {
+      key: 'company-agriculture',
+      industry: '農業',
+      industryEn: 'Agriculture',
+      challenge: '農繁期の労働力が慢性的に不足しており、定着する人材がいなかった',
+      solution: '農業経験を持つネパール人人材をご紹介',
+      result: '現在も継続就労中',
+      comment: "体力があって真面目に取り組んでくれています。生活面でもSun's Sonさんがフォローしてくれているので、こちらは仕事のことだけ考えられるのが助かっています。",
+      commentAuthor: '農場オーナー',
+    },
+  ]
+
+  /** 就労者プロフィール */
+  const workers = [
+    {
+      key: 'worker-1',
+      name: 'R. Thapa',
+      role: 'ホテルスタッフ',
+      industry: '宿泊',
+      startedAt: '2024年',
+      comment: '学校でネパール語で丁寧に教えてもらったので、日本語の難しいところもしっかり理解できました。今はお客様と話すのが楽しいです。',
+      imageSrc: null as string | null,
+    },
+    {
+      key: 'worker-2',
+      name: 'S. Gurung',
+      role: 'ホテルスタッフ',
+      industry: '宿泊',
+      startedAt: '2024年',
+      comment: '困ったことがあればすぐに相談できる窓口があるので、安心して毎日働けています。',
+      imageSrc: null as string | null,
+    },
+    {
+      key: 'worker-3',
+      name: 'P. Shrestha',
+      role: 'ホテルスタッフ',
+      industry: '宿泊',
+      startedAt: '2024年',
+      comment: '職場のマナーや挨拶の仕方を就労前にしっかり教えてもらえたので、初日から自信を持って仕事に臨めました。',
+      imageSrc: null as string | null,
+    },
+    {
+      key: 'worker-4',
+      name: 'B. Tamang',
+      role: '農業従事者',
+      industry: '農業',
+      startedAt: '2024年',
+      comment: 'ネパールでも農業をしていたので仕事にはすぐ慣れました。日本の農業技術はとても先進的で、毎日学ぶことがあります。',
+      imageSrc: null as string | null,
+    },
+    {
+      key: 'worker-5',
+      name: 'K. Rai',
+      role: '農業従事者',
+      industry: '農業',
+      startedAt: '2024年',
+      comment: '最初は不安でしたが、担当の方が定期的に連絡してくれるので一人じゃないと感じられます。日本での生活も楽しいです。',
+      imageSrc: null as string | null,
+    },
+  ]
+
+  // ─────────────────────────────────────────
   // アフターケアページコンテンツ
   // ─────────────────────────────────────────
 
@@ -482,5 +562,7 @@ export const useSiteContent = () => {
     benefits,
     applicationSteps,
     recruitmentPoints,
+    caseStudies,
+    workers,
   }
 }

@@ -7,13 +7,12 @@ const placeholderImageUrl = usePublicUrl('/images/hero_1.png')
   <main>
     <!-- ===== 1. ページヒーロー ===== -->
     <PageHero
-      label="Our Strengths"
       title="Sun's Sonの強み"
       description="創業50年超の実績が培った技術力・現場対応力・品質安全管理。平山工業が現場で大切にする3つの強みをご紹介します。"
     />
 
     <!-- ===== 2. 3つのこだわり（詳細） ===== -->
-    <section class="py-20 md:py-28 bg-white">
+    <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6">
         <div class="space-y-20 md:space-y-28">
           <div
@@ -24,7 +23,7 @@ const placeholderImageUrl = usePublicUrl('/images/hero_1.png')
             :class="{ 'md:[&>*:first-child]:order-last': index % 2 === 1 }"
           >
             <!-- 画像 -->
-            <div class="relative rounded-sm overflow-hidden aspect-[4/3]">
+            <div class="relative border border-rule overflow-hidden aspect-[4/3]">
               <img
                 :src="placeholderImageUrl"
                 :alt="strength.title"
@@ -35,10 +34,10 @@ const placeholderImageUrl = usePublicUrl('/images/hero_1.png')
 
             <!-- テキスト -->
             <div>
-              <h2 class="text-2xl md:text-3xl font-black text-primary-900 mb-5">
+              <h2 class="text-2xl md:text-3xl font-bold text-text mb-5">
                 {{ strength.title }}
               </h2>
-              <p class="text-neutral-600 leading-relaxed mb-8">
+              <p class="text-text leading-relaxed mb-8">
                 {{ strength.detail }}
               </p>
               <CheckList :items="strength.highlights" />
@@ -49,23 +48,10 @@ const placeholderImageUrl = usePublicUrl('/images/hero_1.png')
     </section>
 
     <!-- ===== 3. 実績数値 ===== -->
-    <section class="py-16 md:py-20 bg-primary-950 text-white">
+    <section class="py-16 md:py-20 bg-white">
       <div class="max-w-6xl mx-auto px-6">
-        <p class="text-center text-accent-400 text-xs font-medium tracking-[0.2em] uppercase mb-10">
-          Numbers
-        </p>
-        <dl class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div
-            v-for="stat in stats"
-            :key="stat.label"
-            class="text-center"
-          >
-            <dd class="text-4xl md:text-5xl font-black text-white leading-none mb-1">
-              {{ stat.value }}<span class="text-xl md:text-2xl ml-0.5">{{ stat.unit }}</span>
-            </dd>
-            <dt class="text-neutral-400 text-xs mt-2">{{ stat.label }}</dt>
-          </div>
-        </dl>
+        <SectionHeading title="数字で見る" class="mb-8" />
+        <StatRow :stats="stats" />
       </div>
     </section>
 
@@ -74,13 +60,13 @@ const placeholderImageUrl = usePublicUrl('/images/hero_1.png')
 
     <!-- ===== 5. 対応工種 ===== -->
     <section class="py-16 md:py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-6 text-center">
-        <SectionHeading label="Work Types" title="対応工種・施工実績" class="mb-10" />
-        <div class="flex flex-wrap justify-center gap-3">
+      <div class="max-w-6xl mx-auto px-6">
+        <SectionHeading title="対応工種・施工実績" class="mb-10" />
+        <div class="flex flex-wrap gap-2">
           <TagBadge
             v-for="work in workTypes"
             :key="work"
-            variant="neutral"
+            variant="line"
           >
             {{ work }}
           </TagBadge>
@@ -88,7 +74,6 @@ const placeholderImageUrl = usePublicUrl('/images/hero_1.png')
         <div class="mt-12">
           <AppButton to="/business/" size="lg" variant="secondary">
             事業紹介を見る
-            <IconArrow />
           </AppButton>
         </div>
       </div>

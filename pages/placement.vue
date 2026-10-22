@@ -40,6 +40,7 @@ const industries = [
   {
     key: 'care',
     label: '介護',
+    illust: '/images/illust/care_wheelchair.svg',
     status: 'strong',
     statusLabel: '専門教育あり',
     description:
@@ -48,6 +49,7 @@ const industries = [
   {
     key: 'food-service',
     label: '外食業',
+    illust: '/images/illust/chef.svg',
     status: 'strong',
     statusLabel: '希望者多数',
     description:
@@ -56,6 +58,7 @@ const industries = [
   {
     key: 'accommodation',
     label: '宿泊',
+    illust: '/images/illust/bellboy.svg',
     status: 'track',
     statusLabel: '英語対応可',
     description:
@@ -64,6 +67,7 @@ const industries = [
   {
     key: 'agriculture',
     label: '農業',
+    illust: '/images/illust/farm_stall.svg',
     status: 'track',
     statusLabel: '紹介実績あり',
     description:
@@ -72,6 +76,7 @@ const industries = [
   {
     key: 'logistics',
     label: '物流・倉庫',
+    illust: '/images/illust/delivery.svg',
     status: 'preparing',
     statusLabel: '2027年対応準備中',
     description:
@@ -80,6 +85,7 @@ const industries = [
   {
     key: 'construction',
     label: '建設',
+    illust: '/images/illust/construction_worker.svg',
     status: 'growing',
     statusLabel: '希望者増加中',
     description:
@@ -87,37 +93,42 @@ const industries = [
   },
 ]
 
-const statusStyles: Record<string, string> = {
-  strong: 'bg-primary-400 text-white',
-  track: 'bg-secondary-300 text-neutral-700',
-  growing: 'bg-neutral-100 text-neutral-500',
-  preparing: 'bg-amber-100 text-amber-700',
+type BadgeVariant = 'primary' | 'soft' | 'outline' | 'line'
+
+const statusVariants: Record<string, BadgeVariant> = {
+  strong: 'primary',
+  track: 'outline',
+  growing: 'line',
+  preparing: 'soft',
 }
+
+const licenseRows = [
+  { label: '有料職業紹介事業許可番号', value: company.license },
+]
 </script>
 
 <template>
   <main>
     <!-- ===== 1. ページヒーロー ===== -->
     <PageHero
-      label="Placement"
+      illust="/images/illust/traveler.svg"
+      :parent="{ to: '/business/', label: '事業内容' }"
       title="人材紹介"
       description="「話せる」と証明された人材だけをご紹介します。求人条件のヒアリングから就労後サポートまで一貫対応。"
     />
 
     <!-- ===== 2. サービス概要 ===== -->
-    <section class="py-20 md:py-28 bg-white">
+    <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <SectionHeading title="求める人材を、確かな品質でご紹介" class="mb-10" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
           <div>
-            <SectionHeading label="Our Service" align="left" class="mb-8">
-              求める人材を、確かな品質でご紹介
-            </SectionHeading>
-            <p class="text-neutral-600 text-base leading-relaxed mb-8">
+            <p class="text-text text-base leading-relaxed mb-8">
               Sun's Sonの人材紹介は、教育から一貫して関わってきた候補者だけをご紹介します。JLPT等級だけでなく独自の会話面接で日本語実力を確認し、社会マナー・労働倫理の指導まで済んだ状態でお届けします。
             </p>
             <CheckList :items="placementFeatures" />
           </div>
-          <div class="rounded-2xl overflow-hidden shadow-[0_4px_8px_rgba(41,171,226,0.12)]">
+          <div class="border border-rule">
             <img
               :src="placementImageUrl"
               alt="人材紹介サービスのイメージ"
@@ -130,67 +141,62 @@ const statusStyles: Record<string, string> = {
     </section>
 
     <!-- ===== 3. 品質を支える3つのポイント ===== -->
-    <section class="py-20 md:py-28 bg-[#eaf6fd]">
-      <div class="max-w-4xl mx-auto px-6">
-        <SectionHeading label="Quality" class="mb-14">
-          「人の役に立てる人材」を輩出する3つの取り組み
-        </SectionHeading>
-        <dl class="space-y-8">
-          <div
-            v-for="(point, index) in qualityPoints"
-            :key="point.title"
-            class="bg-white rounded-2xl p-8 md:p-10 flex gap-6 items-start"
-          >
-            <div class="w-10 h-10 rounded-full bg-primary-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <span class="text-primary-400 font-black text-sm">{{ String(index + 1).padStart(2, '0') }}</span>
-            </div>
-            <div>
-              <dt class="font-black text-neutral-800 text-lg mb-3">{{ point.title }}</dt>
-              <dd class="text-neutral-600 text-sm leading-relaxed">{{ point.description }}</dd>
-            </div>
-          </div>
-        </dl>
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6 [&>p]:max-w-3xl">
+        <SectionHeading title="「人の役に立てる人材」を輩出する3つの取り組み" class="mb-8" />
+        <PointList :items="qualityPoints" />
       </div>
     </section>
 
     <!-- ===== 4. 対応職種 ===== -->
-    <section class="py-20 md:py-28 bg-white">
-      <div class="max-w-4xl mx-auto px-6">
-        <SectionHeading label="Industries" class="mb-14">
-          対応職種・分野
-        </SectionHeading>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div
-            v-for="industry in industries"
-            :key="industry.key"
-            class="bg-[#eaf6fd] rounded-2xl p-8 flex flex-col gap-4"
-          >
-            <div class="flex items-center justify-between gap-3">
-              <h3 class="font-black text-neutral-800 text-xl">{{ industry.label }}</h3>
-              <span
-                class="text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap"
-                :class="statusStyles[industry.status]"
-              >
-                {{ industry.statusLabel }}
-              </span>
-            </div>
-            <p class="text-neutral-600 text-sm leading-relaxed">{{ industry.description }}</p>
-          </div>
-        </div>
-        <p class="text-neutral-400 text-xs mt-6 text-center">
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <SectionHeading title="対応職種・分野" class="mb-10" />
+        <table class="w-full text-left border-t-2 border-primary">
+          <caption class="sr-only">対応職種と現在の状況</caption>
+          <thead class="hidden md:table-header-group">
+            <tr class="border-b border-rule text-sm text-muted">
+              <th scope="col" class="py-3 pr-6 font-normal w-56">分野</th>
+              <th scope="col" class="py-3 pr-6 font-normal w-48">現在の状況</th>
+              <th scope="col" class="py-3 font-normal">内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="industry in industries"
+              :key="industry.key"
+              class="flex flex-col gap-2 py-5 border-b border-rule md:table-row"
+            >
+              <th scope="row" class="text-lg font-bold text-text md:py-5 md:pr-6 md:align-top">
+                <span class="flex items-center gap-3">
+                  <span class="flex-shrink-0 w-20 h-20 rounded-full bg-primary-bg flex items-center justify-center">
+                    <IllustImage :src="industry.illust" class="h-16 w-16" />
+                  </span>
+                  {{ industry.label }}
+                </span>
+              </th>
+              <td class="md:py-5 md:pr-6 md:align-top">
+                <TagBadge :variant="statusVariants[industry.status]">
+                  {{ industry.statusLabel }}
+                </TagBadge>
+              </td>
+              <td class="text-base leading-relaxed text-text md:py-5 md:align-top">
+                {{ industry.description }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-muted text-sm mt-6">
           上記以外の分野についてもお気軽にご相談ください。
         </p>
       </div>
     </section>
 
     <!-- ===== 5. 完全成功報酬 ===== -->
-    <section class="py-16 md:py-20 bg-primary-400 text-white">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <p class="text-white/70 text-xs font-semibold tracking-[0.2em] uppercase mb-4">Fee Structure</p>
-        <h2 class="text-2xl md:text-3xl font-black mb-4">
-          採用が決まるまで、費用は一切かかりません
-        </h2>
-        <p class="text-white/80 text-base leading-relaxed max-w-xl mx-auto">
+    <section class="py-16 md:py-20 bg-primary">
+      <div class="max-w-6xl mx-auto px-6 [&>p]:max-w-3xl">
+        <SectionHeading title="採用が決まるまで、費用は一切かかりません" inverse class="mb-6" />
+        <p class="text-white text-base leading-relaxed">
           弊社の人材紹介は完全成功報酬制です。求人条件のヒアリングから候補者のご提示・選考サポートまで、採用決定前の費用はいただきません。まずはお気軽にご相談ください。
         </p>
       </div>
@@ -198,41 +204,22 @@ const statusStyles: Record<string, string> = {
 
     <!-- ===== 6. 許可番号 ===== -->
     <section class="py-10 bg-white">
-      <div class="max-w-4xl mx-auto px-6 flex justify-center">
-        <div class="bg-[#eaf6fd] rounded-2xl px-8 py-6 inline-flex items-center gap-4">
-          <svg class="w-6 h-6 text-primary-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-          </svg>
-          <div>
-            <p class="text-xs text-neutral-500 mb-0.5">有料職業紹介事業許可番号</p>
-            <p class="font-bold text-neutral-800">{{ company.license }}</p>
-          </div>
-        </div>
+      <div class="max-w-6xl mx-auto px-6 [&>p]:max-w-3xl">
+        <InfoTable :rows="licenseRows" />
       </div>
     </section>
 
     <!-- ===== 7. 紹介までの流れ ===== -->
     <StepsSection
-      label="Deal Flow"
       title="人材紹介までの流れ"
       :steps="referralFlows"
     />
 
     <!-- ===== 8. 教育ページへの誘導 ===== -->
-    <section class="py-16 md:py-20 bg-white">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <p class="text-neutral-500 text-sm mb-2">紹介する人材の教育背景について</p>
-        <h2 class="text-xl md:text-2xl font-black text-neutral-800 mb-6">
-          どんな教育を受けた人材なのか、詳しく見る
-        </h2>
-        <SlideLink
-          to="/education/"
-          class="inline-flex items-center text-primary-400 font-semibold hover:text-primary-600 transition-colors"
-        >
-          教育の取り組みをくわしく見る
-        </SlideLink>
-      </div>
-    </section>
+    <RelatedLinks
+      lead="紹介する人材の教育背景について"
+      :links="[{ to: '/education/', label: 'どんな教育を受けた人材なのか、くわしく見る' }]"
+    />
 
     <!-- ===== 9. CTA ===== -->
     <CtaSection />

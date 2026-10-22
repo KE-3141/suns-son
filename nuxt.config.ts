@@ -9,6 +9,8 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'ja' },
+      // JavaScript が動かないときは、フェードで隠した要素をそのまま見せる
+      noscript: [{ innerHTML: '<style>[data-reveal]{opacity:1!important;transform:none!important}</style>' }],
       meta: [
         {
           name: 'description',
@@ -36,10 +38,17 @@ export default defineNuxtConfig({
 
   fonts: {
     families: [
+      // 日本語：見出しも本文も Zen Kaku Gothic New（スマートさ）
       {
-        name: 'Noto Sans JP',
+        name: 'Zen Kaku Gothic New',
         provider: 'google',
         weights: [400, 700, 900],
+      },
+      // 数字・英字：少し丸みのある Outfit（ポップさ）
+      {
+        name: 'Outfit',
+        provider: 'google',
+        weights: [600, 700],
       },
     ],
   },

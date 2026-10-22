@@ -1,17 +1,22 @@
 <script setup lang="ts">
+/**
+ * 小さなラベル（UKARU の c.tag）。
+ * primary：青の塗りに白い文字。soft：淡い青に青い文字。outline / line：線だけ。
+ */
 interface Props {
-  variant?: 'neutral' | 'primary' | 'ghost'
+  variant?: 'primary' | 'soft' | 'outline' | 'line'
 }
-withDefaults(defineProps<Props>(), { variant: 'neutral' })
+withDefaults(defineProps<Props>(), { variant: 'line' })
 </script>
 
 <template>
   <span
     :class="[
-      'inline-block border rounded-sm text-sm font-medium',
-      variant === 'neutral' && 'border-neutral-200 text-neutral-700 px-5 py-3',
-      variant === 'primary' && 'bg-primary-50 border-primary-400 text-primary-400 px-4 py-2',
-      variant === 'ghost'   && 'bg-transparent border-white text-white px-4 py-2',
+      'inline-block text-xs font-bold leading-relaxed px-3 rounded-full whitespace-nowrap border',
+      variant === 'primary' && 'bg-primary-deep border-primary-deep text-white',
+      variant === 'soft' && 'bg-primary-bg border-primary-bg text-primary-deep',
+      variant === 'outline' && 'bg-white border-primary text-primary-deep',
+      variant === 'line' && 'bg-white border-rule text-muted',
     ]"
   >
     <slot />

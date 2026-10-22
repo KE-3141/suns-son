@@ -1,6 +1,9 @@
 <script setup lang="ts">
+/**
+ * 画像つきの紹介ブロック（画像・見出し・説明・箇条書きまたはリンク）。
+ * 外枠は付けない。画像の下に見出しと本文が続くだけの素直な組み方にする。
+ */
 interface Props {
-  label: string
   title: string
   description: string
   to?: string
@@ -8,23 +11,18 @@ interface Props {
   items?: string[]
   imageSrc?: string
   imageAlt?: string
-  variant?: 'primary' | 'neutral'
   imageFit?: 'cover' | 'contain'
 }
 withDefaults(defineProps<Props>(), {
-  variant: 'primary',
   imageFit: 'cover',
 })
 </script>
 
 <template>
-  <div
-    class="relative bg-white text-neutral-900 rounded-sm overflow-hidden flex flex-col"
-  >
-    <!-- 画像（オプション） -->
+  <article class="flex flex-col">
     <div
       v-if="imageSrc"
-      :class="['relative h-72 overflow-hidden flex-shrink-0', imageFit === 'contain' ? 'pt-6' : '']"
+      :class="['h-56 overflow-hidden flex-shrink-0 mb-6', imageFit === 'contain' ? 'pt-6 bg-primary-bg' : '']"
     >
       <img
         :src="imageSrc"
@@ -33,30 +31,22 @@ withDefaults(defineProps<Props>(), {
         loading="lazy"
       />
     </div>
-    <!-- コンテンツ -->
-    <div class="relative p-10 md:p-12 flex flex-col flex-1">
-      <p class="text-primary-400 text-xs font-medium tracking-[0.2em] uppercase mb-3">
-        {{ label }}
-      </p>
-      <h3 class="text-2xl font-black mb-4">{{ title }}</h3>
-      <p class="text-neutral-900 text-base leading-relaxed">
-        {{ description }}
-      </p>
-      <!-- 箇条書きモード -->
-      <CheckList
-        v-if="items?.length"
-        :items="items"
-        variant="muted"
-        class="mt-auto pt-8"
-      />
-      <!-- テキストリンクモード -->
-      <SlideLink
-        v-else-if="to && linkText"
-        :to="to"
-        class="inline-flex items-center text-primary-400 font-semibold text-base mt-auto pt-8"
-      >
-        {{ linkText }}
-      </SlideLink>
-    </div>
-  </div>
+    <SubHeading class="mb-4">{{ title }}</SubHeading>
+    <p class="text-text text-base leading-relaxed">
+      {{ description }}
+    </p>
+    <CheckList
+      v-if="items?.length"
+      :items="items"
+      class="mt-6"
+    />
+    <AppButton
+      v-else-if="to && linkText"
+      :to="to"
+      variant="secondary"
+      class="mt-6"
+    >
+      {{ linkText }}
+    </AppButton>
+  </article>
 </template>

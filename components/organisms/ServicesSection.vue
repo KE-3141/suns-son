@@ -1,30 +1,43 @@
 <script setup lang="ts">
 /**
- * サービス内容セクション（2カラムグリッド）。
+ * 事業内容セクション。教育・紹介・サポートの3事業を1行ずつ並べる。
+ * 左にイラストの丸い板、右に柱の言葉・事業名・説明・リンク。
  * index.vue と business.vue で共用。
  */
+interface Props {
+  title?: string
+}
+
+withDefaults(defineProps<Props>(), {
+  title: '事業内容',
+})
+
 const { services } = useSiteContent()
 </script>
 
 <template>
-  <section class="py-16 md:py-24 bg-[#eaf6fd]">
+  <section class="py-16 md:py-24 bg-white">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="mb-12 text-center">
-        <SectionHeading title="事業内容" label="Our Services" />
-      </div>
+      <SectionHeading :title="title" class="mb-6" />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-        <BusinessCard
-          v-for="service in services"
-          :key="service.key"
-          :label="service.label"
-          :title="service.title"
-          :description="service.description"
-          :image-src="service.imageSrc"
-          :image-alt="service.imageAlt"
-          :to="service.to ?? ''"
-          :link-text="service.linkText ?? ''"
-        />
+      <div
+        v-for="service in services"
+        :key="service.key"
+        class="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-5 py-8 border-b border-rule md:items-center"
+      >
+        <div class="md:col-span-4 h-48 rounded-3xl bg-primary-bg flex items-center justify-center px-6 py-4">
+          <IllustImage :src="service.illust" class="h-full w-auto" />
+        </div>
+        <div class="md:col-span-8">
+          <p class="inline-block text-lg font-bold text-white bg-primary rounded-full px-4 mb-3">
+            {{ service.pillar }}
+          </p>
+          <h3 class="text-lg md:text-xl font-bold leading-snug text-text mb-2">{{ service.title }}</h3>
+          <p class="text-base leading-relaxed text-text mb-4">{{ service.description }}</p>
+          <AppButton :to="service.to" variant="secondary">
+            {{ service.linkText }}
+          </AppButton>
+        </div>
       </div>
     </div>
   </section>

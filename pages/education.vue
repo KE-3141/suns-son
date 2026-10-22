@@ -9,31 +9,47 @@ const rajanUrl = usePublicUrl('/images/rajan.svg')
 const classImageUrl = usePublicUrl('/images/class.png')
 const placementImageUrl = usePublicUrl('/images/placement.png')
 
-const { educationActivities } = useSiteContent()
+const languageTeacherUrl = usePublicUrl('/images/language_teacher.svg')
+const expertTeacherUrl = usePublicUrl('/images/expert_teacher.svg')
+
+const { company, educationActivities } = useSiteContent()
 </script>
 
 <template>
   <main>
     <!-- ===== 1. ヒーロー ===== -->
     <PageHero
-      label="Education"
+      illust="/images/illust/teacher.svg"
+      :parent="{ to: '/business/', label: '事業内容' }"
       title="教育"
       description="UKARU Academyが培ったネパール人への教育力が、質の高い人材輩出を支えています。"
     />
 
-    <!-- ===== 2. 3つの教育活動 一覧（SplitListSection） ===== -->
-    <SplitListSection
-      label="Our Education"
-      title="3つの教育活動"
-      description="TikTok・日本語学校・オンラインクラスの3つのチャネルで、日本就労を目指すネパール人を育てています。"
-      theme="light"
-      :items="educationActivities"
-    />
+    <!-- ===== 2. このページの内容（ページ内リンク） ===== -->
+    <section class="pt-16 md:pt-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <p class="text-text text-base md:text-lg leading-relaxed max-w-3xl mb-8">
+          TikTok・日本語学校・オンラインクラスの3つの場で、日本就労を目指すネパール人を育てています。
+        </p>
+        <ul class="border-t border-rule">
+          <li
+            v-for="activity in educationActivities"
+            :key="activity.key"
+            class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-1 py-4 border-b border-rule"
+          >
+            <SlideLink :to="`#${activity.key}`" class="text-primary-deep font-bold w-fit">
+              {{ activity.title }}
+            </SlideLink>
+            <p class="md:col-span-2 text-sm leading-relaxed text-muted">{{ activity.shortDescription }}</p>
+          </li>
+        </ul>
+      </div>
+    </section>
 
     <!-- ===== 3. TikTok ===== -->
-    <section class="py-20 md:py-28 bg-white">
+    <section id="tiktok" class="py-16 md:py-24 bg-white scroll-mt-20">
       <div class="max-w-6xl mx-auto px-6">
-        <SectionHeading label="TikTok" title="TikTokでの日本語学習コンテンツ配信" class="mb-14" />
+        <SectionHeading title="TikTokでの日本語学習コンテンツ配信" class="mb-10" />
 
         <!-- 左右分割：左=rajan+TikTokロゴ、右=説明 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-14">
@@ -42,24 +58,24 @@ const { educationActivities } = useSiteContent()
           <div class="flex flex-col items-center gap-6">
             <img
               :src="rajanUrl"
-              alt="代表者イラスト"
-              class="h-52 md:h-64 w-auto drop-shadow-lg"
+              :alt="`代表 ${company.ceo}`"
+              class="h-52 md:h-64 w-auto"
               loading="lazy"
             />
-            <SlideLink
+            <AppButton
               to="https://www.tiktok.com/@_rajan_bhandari_"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2.5 text-primary-400 font-bold text-base"
+              variant="secondary"
               aria-label="TikTok @_rajan_bhandari_ を開く"
             >
               @_rajan_bhandari_の投稿を見てみる
-            </SlideLink>
+            </AppButton>
           </div>
 
           <!-- 右：説明テキスト -->
           <div>
-            <p class="text-neutral-600 text-base leading-relaxed mb-6">
+            <p class="text-text text-base leading-relaxed mb-6">
               代表バンダーリ ラジャンが運営するTikTokアカウントでは、日本での就労・留学を目指すネパール人に向けたコンテンツをネパール語で発信しています。
             </p>
             <CheckList :items="[
@@ -85,14 +101,14 @@ const { educationActivities } = useSiteContent()
     </section>
 
     <!-- ===== 4. 日本語学校（右：画像、左：説明＋数字） ===== -->
-    <section class="py-20 md:py-28 bg-[#eaf6fd]">
+    <section id="school" class="py-16 md:py-24 bg-white scroll-mt-20">
       <div class="max-w-6xl mx-auto px-6">
-        <SectionHeading label="School" title="ネパールでの日本語学校運営" class="mb-14" />
+        <SectionHeading title="ネパールでの日本語学校運営" class="mb-10" />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
           <!-- 左：説明＋数字 -->
           <div>
-            <p class="text-neutral-600 text-base leading-relaxed mb-6">
+            <p class="text-text text-base leading-relaxed mb-6">
               ネパールの教育法人「UKARU Academy」では、日本での留学・就労を目指すネパール人向けに日本語教育を提供しています。JLPT（日本語能力試験）対策をメインに、会話力強化など実践的な日本語能力の向上を目標としています。
             </p>
             <CheckList class="mb-8" :items="[
@@ -109,7 +125,7 @@ const { educationActivities } = useSiteContent()
           </div>
 
           <!-- 右：画像 -->
-          <div class="rounded-2xl overflow-hidden shadow-[0_4px_8px_rgba(41,171,226,0.12)]">
+          <div class="border border-rule overflow-hidden">
             <img
               :src="classImageUrl"
               alt="UKARU Academyの日本語授業風景"
@@ -122,13 +138,13 @@ const { educationActivities } = useSiteContent()
     </section>
 
     <!-- ===== 5. オンラインクラス（左：画像、右：説明＋数字） ===== -->
-    <section class="py-20 md:py-28 bg-white">
+    <section id="online" class="py-16 md:py-24 bg-white scroll-mt-20">
       <div class="max-w-6xl mx-auto px-6">
-        <SectionHeading label="Online Class" title="日本在住ネパール人向けオンラインクラス" class="mb-14" />
+        <SectionHeading title="日本在住ネパール人向けオンラインクラス" class="mb-10" />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
           <!-- 左：画像 -->
-          <div class="rounded-2xl overflow-hidden shadow-[0_4px_8px_rgba(41,171,226,0.12)] order-2 md:order-1">
+          <div class="border border-rule overflow-hidden order-2 md:order-1">
             <img
               :src="placementImageUrl"
               alt="オンラインクラスの様子"
@@ -139,7 +155,7 @@ const { educationActivities } = useSiteContent()
 
           <!-- 右：説明＋数字 -->
           <div class="order-1 md:order-2">
-            <p class="text-neutral-600 text-base leading-relaxed mb-6">
+            <p class="text-text text-base leading-relaxed mb-6">
               日本に在留しているネパール人向けに、オンラインクラスも開講しています。就労しながらでも学べる環境を整え、日本語力・実践的なコミュニケーション能力の底上げをサポートしています。
             </p>
             <CheckList class="mb-8" :items="[
@@ -159,17 +175,16 @@ const { educationActivities } = useSiteContent()
     </section>
 
     <!-- ===== 6. ダブル教育体制 ===== -->
-    <section class="py-20 md:py-28 bg-[#eaf6fd]">
+    <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6">
-        <SectionHeading label="Our Teachers" title="ダブル教育体制" class="mb-14" />
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <SectionHeading title="ダブル教育体制" class="mb-10" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           <BusinessCard
-            label="Japanese Language Teacher"
             title="ネパール人日本語講師"
             image-fit="contain"
             description="全員が10歳前後以前から日本で生活しており、ネイティブレベルの日本語力と日本文化への深い理解を持っています。ネパール語も流暢なため、講義は生徒の母語で実施。難しい内容や細かなニュアンスも正確に伝えられ、「意味を誤解した」「説明が分からなかった」が起こりません。"
-            imageSrc="/images/language_teacher.svg"
-            imageAlt="ネパール人日本語講師"
+            :image-src="languageTeacherUrl"
+            image-alt="ネパール人日本語講師"
             :items="[
               '日本語はネイティブレベル。高度な内容・細かいニュアンスも指導可能',
               'ネパール語で講義を実施。母語での説明で正確な理解を保証',
@@ -178,12 +193,11 @@ const { educationActivities } = useSiteContent()
             ]"
           />
           <BusinessCard
-            label="Japanese Specialist Teacher"
             title="日本人専門講師"
             image-fit="contain"
             description="特定技能分野の専門知識を持つ日本人講師が、各分野の実務に直結したカリキュラムで指導します。専門用語や技術的な内容については、ネパール人講師がネパール語による補足解説を行うため、専門知識をしっかりと理解させることができます。"
-            imageSrc="/images/expert_teacher.svg"
-            imageAlt="日本人専門講師"
+            :image-src="expertTeacherUrl"
+            image-alt="日本人専門講師"
             :items="[
               '特定技能各分野の実務に精通した日本人プロフェッショナル',
               '日本人専門講師と日本語講師が連携して授業を実施',

@@ -2,52 +2,71 @@
 @import "@nuxt/ui";
 
 @theme {
-  /* Primary — Sky Blue (#29ABE2・親しみやすさ・グローバル） */
-  --color-primary-50:  #eaf6fd;
-  --color-primary-100: #d0ecf9;
-  --color-primary-200: #9dd6f3;
-  --color-primary-300: #62bceb;
-  --color-primary-400: #29abe2;
-  --color-primary-500: #1a96cc;
-  --color-primary-600: #1480af;
-  --color-primary-700: #106a91;
-  --color-primary-800: #0c5473;
-  --color-primary-900: #083d55;
-  --color-primary-950: #042537;
+  /*
+   * UKARU テーマの色。
+   * 正本は UKARU/_tools/designkit/themes/ukaru/tokens.json（designkit: copy）。
+   * 値を変えるときは tokens.json を先に直し、ここを写し直す。
+   * 名前（primary・accent など）は tokens.json のキーとそろえている。
+   */
+  /*
+   * 青はロゴ（simple_logo.svg）の色に合わせる（tokens.json の青から差し替え）。
+   * ボタン・帯・大きい文字（見出しの強調・大きい数字）はロゴの青 primary のまま。
+   * primary は小さい文字だと読みにくい（白とのコントラスト 2.6）ため、
+   * 小さい青い文字と、小さい白い文字を載せる塗りには鮮やかで少し濃い primary-deep を使う。
+   */
+  --color-primary:       #29ABE2; /* ロゴの青（ボタン・帯・大きい文字・線・枠・印・面） */
+  --color-primary-deep:  #0078C2; /* 小さい青い文字と、小さい白い文字を載せる塗り（ラベル・フッター）。白とのコントラスト 4.7 */
+  --color-primary-dark:  #0062AD; /* primary-deep のホバー */
+  --color-primary-light: #78CAED; /* 薄い青 */
+  --color-primary-bg:    #E9F6FC; /* 青の背景（ヒーロー・CTA・イラストの板） */
+  --color-sub:           #B5CCDA; /* ロゴの灰青（見出しの短い線・世界地図） */
+  --color-accent:        #F1721E; /* オレンジ。このサイトでは使わない */
+  --color-accent-text:   #D9600F; /* このサイトでは使わない */
+  --color-bubble:        #FFF1E5; /* このサイトでは使わない（吹き出しは primary-bg） */
+  --color-text:          #1F2A33; /* 本文 */
+  --color-muted:         #6B7780; /* 補足の文字 */
+  --color-gray:          #9AA4AB; /* 比べる相手・✕ */
+  --color-rule:          #DDE3E8; /* 罫線 */
+  --color-track:         #EEF1F3; /* グラフの下地・薄い区切り */
+  --color-soft:          #F4F6F7; /* 注記の背景 */
 
-  /* Secondary — Blue Gray（#b5ccda を中間・信頼・落ち着き） */
-  --color-secondary-50:  #f6f9fb;
-  --color-secondary-100: #eff4f7;
-  --color-secondary-200: #e3ecf1;
-  --color-secondary-300: #d9e4ec;
-  --color-secondary-400: #b5ccda;
-  --color-secondary-500: #93a8b5;
-  --color-secondary-600: #748793;
-  --color-secondary-700: #5b6d79;
-  --color-secondary-800: #455661;
-  --color-secondary-900: #303f4a;
-  --color-secondary-950: #23323c;
+  /* @nuxt/ui が text-muted を自前の灰色にするため、UKARU の muted に戻す */
+  --text-color-muted: var(--color-muted);
 
-  /* Neutral — Gray */
-  --color-neutral-50:  #f6f7f8;
-  --color-neutral-100: #ebedf0;
-  --color-neutral-200: #d3d7dc;
-  --color-neutral-300: #b0b7bf;
-  --color-neutral-400: #8a939e;
-  --color-neutral-500: #6b7583;
-  --color-neutral-600: #545e6b;
-  --color-neutral-700: #434b57;
-  --color-neutral-800: #383f49;
-  --color-neutral-900: #31363f;
-  --color-neutral-950: #1e2229;
-
-  /* Base — Very Light Blue（= primary-50） */
-  --color-base: #eaf6fd;
-
-  /* Typography */
+  /*
+   * Typography
+   * 日本語：見出しも本文も Zen Kaku Gothic New（スマート）
+   * 見出しの英字と数字：Outfit（少し丸みがあってポップ）
+   * 見出しのひらがな：Heading Kana（Zen Kaku Gothic New のひらがなを少し小さく。下の @font-face）
+   */
   --font-sans:
-    'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
     'Yu Gothic', 'Meiryo', sans-serif;
+  --font-display: 'Outfit', 'Heading Kana', 'Zen Kaku Gothic New', sans-serif;
+  --font-num: 'Outfit', 'Zen Kaku Gothic New', sans-serif;
+}
+
+/*
+ * 見出しのひらがなを少し小さくする。
+ * Zen Kaku Gothic New のひらがなだけを切り出したファイル（Google Fonts の text= で取得）を
+ * unicode-range でひらがなにだけ当て、size-adjust で縮める。漢字・カタカナ・英数字の大きさは変わらない。
+ */
+@font-face {
+  font-family: 'Heading Kana';
+  src: url('../fonts/zen_kaku_gothic_new_kana_700.woff2') format('woff2');
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range: U+3041-3096, U+309D-309F;
+  size-adjust: 88%;
+}
+
+@font-face {
+  font-family: 'Heading Kana';
+  src: url('../fonts/zen_kaku_gothic_new_kana_900.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+  unicode-range: U+3041-3096, U+309D-309F;
+  size-adjust: 88%;
 }
 
 html {
@@ -57,23 +76,33 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-neutral-700);
+  color: var(--color-text);
   background-color: #fff;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-/* カスタムスクロールバー */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
 }
-::-webkit-scrollbar-track {
-  background: var(--color-primary-50);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary-400);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-600);
+
+/*
+ * スクロールで現れるフェード（v-reveal と plugins/reveal.client.ts）。
+ * data-reveal の要素は、画面に入ると is-revealed が付いて下からふわっと出る。
+ * 遅れは --reveal-delay（ヒーローの順番出し・並んだ項目の時間差）。
+ * 動きを減らす設定の人には動かさない。
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -39,45 +39,60 @@ pages/          Nuxt の pages/ ディレクトリ
 | 1ファイル内に同パターンが2回以上出現する | `v-for` + データ配列に統一する |
 | ページ末尾の CTA ブロック | `<CtaSection />` を使う（直書き禁止） |
 | 内部ページのヒーローヘッダー | `<PageHero />` を使う（直書き禁止） |
-| セクション見出し（英語ラベル + h2） | `<SectionHeading />` を使う（直書き禁止） |
-| コンテンツ内の別ページ誘導リンク | `<SlideLink />` を使う（`NuxtLink` + `IconArrow` 直書き禁止） |
+| セクション見出し（h2 + 下線） | `<SectionHeading />` を使う（直書き禁止） |
+| コンテンツ内の別ページ誘導リンク | `<AppButton variant="secondary" />` を使う（`NuxtLink` 直書き禁止） |
+| ページ内の目次（`#id` へのリンク） | `<SlideLink />` を使う |
+| 順序のない要点（約束・強み・取り組みなど） | `<PointList />` を使う |
+| ページ下部の関連ページ誘導 | `<RelatedLinks />` を使う |
+| 手順・流れ | `<FlowSteps />` を使う |
 
 ### 既存の共通コンポーネント
 
 | コンポーネント | 用途 |
 |---|---|
 | `AppButton` | リンク・ボタン（`to` / `href` / なし で自動切替） |
-| `SlideLink` | コンテンツ内の別ページ誘導テキストリンク（ホバーで右スライド） |
-| `IconArrow` | 右矢印アイコン |
+| `SlideLink` | ページ内の目次リンク（`#id` へ。下線つき。矢印・動きなし） |
+| `IconArrow` | 右矢印アイコン（トップのヒーローのボタンでのみ使用） |
+| `IllustImage` | illustkit のイラスト（`src` は `/images/illust/...`。飾りなら alt なし。`eager` でヒーロー用） |
 | `IconPhone` | 電話アイコン |
-| `SectionHeading` | セクション見出し（英語ラベル + h2） |
-| `FeatureCard` | アイコン付き特長カード |
-| `BusinessCard` | 事業紹介カード（画像・タイトル・説明・リンク） |
-| `PageHero` | 内部ページ共通ヒーロー（ダーク背景 + h1 + 説明文） |
-| `CtaSection` | ページ末尾 CTA（電話番号 + お問い合わせボタン） |
+| `SubHeading` | 小見出し h3/h4（左にロゴの青の線） |
+| `TagBadge` | 小さな丸いラベル（primary / soft / outline / line） |
+| `SectionHeading` | セクション見出し（h2 + 下にロゴの青と灰青の短い線。`inverse` で白） |
+| `BusinessCard` | 画像つきの紹介ブロック（外枠なし。画像・小見出し・説明・箇条書きまたはリンク） |
+| `StatRow` | 数字の帯（`font-num` の大きな数字。`note` に出典と時点） |
+| `FlowSteps` | 流れ図（角の丸い箱を → でつなぐ。`illust` で箱の上にイラスト。`goalLast` で最後を塗る） |
+| `InfoTable` | 項目と内容の表（会社概要・許可番号など） |
+| `PointList` | 順序のない要点の一覧（左に見出し、右に説明。行を罫線で区切る。番号は付けない。`illust` で丸いイラスト） |
+| `CheckList` | 箇条書き（四角の小さな印） |
+| `SpeechBubble` | 代表の吹き出し（要所だけで使う） |
+| `RelatedLinks` | ページ下部の関連ページ誘導 |
+| `PageHero` | 内部ページ共通ヒーロー（淡い青背景 + パンくず + h1 + 説明文。`parent` で親ページ、`illust` で右にイラスト） |
+| `ServicesSection` | 事業内容（イラストの板 + 事業を1行ずつ。`title` で見出し変更） |
+| `StepsSection` | 見出し + 流れ図 |
+| `CtaSection` | ページ末尾 CTA（電話番号 + お問い合わせボタン + ラジャンのイラスト） |
 | `AppHeader` | グローバルヘッダー |
 | `AppFooter` | グローバルフッター |
 
-### `SlideLink` の使い方
+### リンクの使い分け（`AppButton` / `SlideLink`）
 
-コンテンツ内で別ページへ誘導するテキストリンク（「〜をくわしく見る」「詳しく見る」など）は必ず `SlideLink` を使う。ホバー時に右スライドするアニメーションと矢印アイコンが自動で付く。
+別ページへ誘導するリンク（「人材紹介について」「教育の詳細はこちら」「会社概要をくわしく見る」など）は、
+テキストリンクではなく **`AppButton variant="secondary"`**（白地 + primary の枠）にする。
+お問い合わせなど主要なアクションは `AppButton`（primary）。
 
 ```vue
-<!-- ライト背景（primary カラー） -->
-<SlideLink to="/company/" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-800 transition-colors">
-  会社概要をくわしく見る
-</SlideLink>
+<AppButton to="/company/" variant="secondary">会社概要をくわしく見る</AppButton>
+<!-- 要点の一覧など、小さく置く場合 -->
+<AppButton to="/placement/" variant="secondary" size="sm">人材紹介について</AppButton>
+```
 
-<!-- ダーク背景（白） -->
-<SlideLink to="/about/" class="inline-flex items-center text-white font-semibold text-sm">
-  強みをくわしく見る
-</SlideLink>
+`SlideLink` は、同じページ内の目次（`#id` へのリンク。例：教育ページの活動一覧）にだけ使う。
+
+```vue
+<SlideLink :to="`#${activity.key}`" class="text-primary font-bold">{{ activity.title }}</SlideLink>
 ```
 
 - `to` prop: リンク先（必須）
-- テキストカラー・フォント・余白は `class` 属性で指定（`inheritAttrs` により root に付与される）
-- `#prefix` スロット: スライドせず固定したい要素（番号など）を配置できる
-- `AppButton` との使い分け: `AppButton` はアクション（お問い合わせ・採用情報など）、`SlideLink` はコンテンツ内の参照誘導に使う
+- 文字色・太さ・余白は `class` で指定する
 
 ---
 
@@ -129,7 +144,7 @@ const { company, navItems } = useSiteContent()
 ```vue
 <script setup lang="ts">
 interface Props {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'glass'
+  variant?: 'primary' | 'secondary'
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -147,10 +162,49 @@ const props = withDefaults(defineProps<Props>(), {
 - **Tailwind CSS ユーティリティクラスのみ**使用する
 - `style=""` 属性は Tailwind で表現できない場合のみ許容する
   （グリッドテンプレート・複雑な `background-image` など）
-- カラートークンは `assets/css/app.css` の `@theme` に定義済みのものを使う
-  - `primary-*` : スカイブルー（`#29abe2` 系・親しみやすさ・ブランド）
-  - `secondary-*` : ブルーグレー（`#b5ccda` 基準・信頼・落ち着き）
-  - `neutral-*` : グレー（テキスト・ボーダー）
+- デザインは UKARU の designkit（`マイドライブ/UKARU/_tools/designkit/themes/ukaru/`）に合わせる
+- カラートークンは `assets/css/app.css` の `@theme` に定義済みのもの（designkit の tokens.json の写し）を使う
+  - **青はロゴ（`simple_logo.svg`）の色に合わせる。** designkit の青（#0071BC）は使わない
+    - `primary`（#29ABE2、ロゴの青）：ボタン（塗り・白ボタンの枠と文字）・帯・大きい文字（見出しの強調・大きい数字）・線・枠・印・面
+    - `primary-deep`（#0078C2、鮮やかな濃い青。濁らせない）：小さい文字の青（ラベル・ナビ・流れ図の小見出しなど）と、小さい白い文字を載せる塗り（ラベル・フッター・流れ図の番号）。ロゴの青は小さい文字だと読みにくい（白とのコントラスト 2.6）
+    - `primary-dark`（#0062AD）：`primary-deep` のホバー
+    - `primary-light` / `primary-bg`（淡い背景）
+    - `sub`（#B5CCDA、ロゴの灰青）：見出しの短い線の2本目・世界地図
+  - **オレンジ（`accent` / `accent-text` / `bubble`）は使わない。** 色は青系だけでまとめる
+  - `text` / `muted` / `rule`（罫線）/ `soft`（淡いグレー背景）
+- フォント（`nuxt.config.ts` の `fonts` と `app.css` の `@theme`）
+  - 日本語は見出しも本文も Zen Kaku Gothic New（スマートさ）。h1 は `font-black`、h2 以下は `font-bold`
+  - 見出しの英字と数字は Outfit（`font-display` / `font-num`。少し丸みのあるポップさ）。h1〜h4 には `app.css` で自動で当たる
+  - 丸ゴシック（Zen Maru Gothic など）は丸っこすぎるので使わない。Noto Sans JP など既定のフォントにも戻さない
+  - 見出し（h1〜h4）のひらがなは少し小さく表示する（`app.css` の `Heading Kana`。`assets/fonts/` のひらがなだけのファイルに `size-adjust` をかけている）。見出しにひらがなを小さくするための `<span>` を書かない
+- **使わないもの**: グラデーション、影（shadow / drop-shadow）、ぼかし（backdrop-blur）、絵文字、
+  飾りだけのアイコン、
+  イタリック、英語ラベルの大文字＋字間あけ、ダッシュ（—, ―）。記号は ○ ✕ → + を使う
+- 区切りは 1px の罫線（`border-rule`）と余白で行う。白い文字は塗りの背景の上でだけ使う
+- **AIっぽさを出さないための決まり**
+  - 見出しの上や横に英語ラベル（「About Us」「Our Services」など）を付けない
+  - 01 / 02 / 03 の番号は手順・時間順のものにだけ付ける（`FlowSteps`）。順序のない要点は `PointList`
+  - 同じ形のカードを並べない。並ぶ情報は表（`InfoTable`・`<table>`）か罫線で区切った行にする
+  - リンク・ボタンの文字に → を付けない（例外：トップのヒーローのお問い合わせボタン）
+  - セクション背景を白と淡い青で交互にしない。背景は白。淡い青は `PageHero` と `CtaSection` だけ、
+    primary の塗りは人材紹介ページの「完全成功報酬」の1か所だけ
+  - コンテナは全セクション `max-w-6xl` で左端をそろえ、文章の行長は `max-w-3xl` で抑える
+  - 動きは「スクロールで現れるフェード」と「操作に対する色の変化」だけ。ホバーでの移動は付けない
+    - 例外：トップのヒーローの代表のイラスト（`public/images/rajan_walk.svg`）だけ、歩いてきて立ち止まる動きを1回付ける。
+      SVG は `scripts/build_rajan_walk.py` で `rajan.svg` から作る（手で編集しない）。他のイラストには動きを付けない
+  - フェードは `plugins/reveal.ts`。ヒーローより下のセクションの中身には自動で付く（並んだ項目は時間差）。
+    付けたくないセクションには `data-no-reveal` を付ける
+  - ヒーロー（トップ・`PageHero`）は `v-reveal="遅れms"` で要素を上から順に出す。新しいフェードの CSS を個別に書かない
+- **ポップさの出し方（イラストと丸み）**
+  - ボタン・ラベルは `rounded-full`。イラストを置く板・流れ図の箱は `rounded-2xl` / `rounded-3xl`、
+    丸い板（`rounded-full bg-primary-bg`）に人物のイラストを入れてもよい
+  - 罫線の行・表・文章の囲みは角を丸めない（構造はカッチリ、飾りの部分だけ丸くする）
+  - イラストは UKARU の illustkit（`マイドライブ/UKARU/_tools/illustkit/library/`）から選び、
+    `public/images/illust/` に snake_case でコピーして `IllustImage` で表示する。ライブラリの SVG は直接編集しない
+  - illustkit にない素材を新しくダウンロードするときは、候補を見せて OK をもらってから（作者は macrovector のみ）
+  - Freepik の素材は表記（「Image by macrovector on Freepik」）の要否を確認してから公開する
+  - 内容と関係のある絵だけを置く（その事業・職種・手順を表す絵）。イラストのためにセリフを作らない
+- 数字には出典と時点を添える（`StatRow` の `note`）
 - **マジックナンバー禁止**（`px-[37px]` のような任意値は原則不可。Tailwind のスケールに合わせる）
 - レスポンシブは `md:` / `lg:` のブレークポイントで対応し、モバイルファーストで書く
 
@@ -239,14 +293,16 @@ suns-son/
   composables/
     useSiteContent.ts           共有データ（会社情報・ナビ・コンテンツ）
     usePublicUrl.ts             public/ 画像 URL の解決
+  plugins/
+    reveal.ts                   スクロールで現れるフェード（v-reveal・自動付与）
   components/
     atoms/
-      AppButton.vue             ボタン（variant: primary / secondary / ghost / glass）
+      AppButton.vue             ボタン（variant: primary / secondary）
       IconArrow.vue             右矢印アイコン
       IconPhone.vue             電話アイコン
     molecules/
-      SectionHeading.vue        セクション見出し（英語ラベル + h2）
-      FeatureCard.vue           特長カード（アイコン + タイトル + 説明）
+      SectionHeading.vue        セクション見出し（h2 + 下線）
+      PointList.vue             順序のない要点の一覧
       PageHero.vue              内部ページ共通ヒーロー
     organisms/
       AppHeader.vue             グローバルヘッダー

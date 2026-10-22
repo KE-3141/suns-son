@@ -3,6 +3,11 @@
 > このドキュメントはサイトのビジュアルデザインの基準を定義します。
 > Nuxt UI v3 / Tailwind CSS v4 ベースで実装します。
 > 既存制作物（sunsson-corporate）のデザインを参照・継承しています。
+>
+> **2026年10月更新**: 見た目のルールは UKARU の designkit
+> （`マイドライブ/UKARU/_tools/designkit/themes/ukaru/`）に移行しました。
+> 色・部品・禁止事項は CLAUDE.md の「5. スタイリング」と `assets/css/app.css` が正です。
+> このドキュメントのブランドコンセプト以外（旧カラーパレット・角丸・影など）は古い内容です。
 
 ---
 

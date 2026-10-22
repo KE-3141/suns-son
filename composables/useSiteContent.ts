@@ -12,12 +12,13 @@ export const useSiteContent = () => {
     nameEn: "Sun's Son Co., Ltd.",
     tagline: '「教育」×「紹介」×「サポート」で日本をもっと元気に。',
     description:
-      "Sun's Son株式会社は、ネパール人人材の教育・紹介・就労後サポートを一貫して提供する人材紹介会社です。",
+      "Sun's Son株式会社は、ネパール人材の教育・紹介・就労後サポートを一貫して提供する人材紹介会社です。",
     philosophy:
       "質の低い紹介業者によって、ネパール人も日本企業も困っている場面を数多く見てきました。言語を教えるだけでなく、日本社会で暮らしていくための倫理観や社会通念をしっかりと伝えることで、人の役に立てる人材を輩出する。そして彼らが安心して日本で生活していけるよう支援する。それがSun's Sonの理念です。",
     postalCode: '169-0073',
     address: '東京都新宿区百人町2-20-23-203',
     addressFull: '〒169-0073 東京都新宿区百人町2-20-23-203',
+    branchAddress: '東京都港区赤坂2-21-4 天翔赤坂ANNEXビル 4F 407-G号室',
     tel: '03-4485-3085',
     telRaw: '0344853085', // href="tel:" 用
     fax: '',
@@ -31,6 +32,7 @@ export const useSiteContent = () => {
     license: '13-ユ-317607',
     licenseSupportOrg: '25 登-012523',
     ceo: 'バンダーリ ラジャン',
+    ceoEn: 'Bhandari Rajan',
     executive: '平山 勉',
     officeAddress: '東京都江東区北砂5-17-37 福原マンション1階',
     businessTypes: '鉄筋工事業・溶接工事業（関東全域）',
@@ -78,10 +80,11 @@ export const useSiteContent = () => {
   const services = [
     {
       key: 'education',
-      title: '日本語教育 × 特定技能教育',
-      label: 'Language & Skills',
+      illust: '/images/illust/classroom.svg',
+      pillar: '教育',
+      title: '日本語 × 特定技能 × マナー教育',
       description:
-        '日本語教育と特定技能教育のダブル体制。日本語ネイティブのネパール人講師がネパール語で指導し、日本人専門講師による特定技能授業を母語でフォロー。専門知識と社会マナーをあわせて習得させます。',
+        '日本語ネイティブのネパール人講師がネパール語で指導し、専門講師による特定技能授業を日本語・母語でフォロー。専門知識と、日本社会のマナーもあわせて習得します。',
       imageSrc: '/images/class.png',
       imageAlt: '教育',
       to: '/education/',
@@ -89,10 +92,11 @@ export const useSiteContent = () => {
     },
     {
       key: 'placement',
+      illust: '/images/illust/airport_checkin.svg',
+      pillar: '紹介',
       title: '人材紹介',
-      label: 'Placement',
       description:
-        '求人条件のヒアリングから選考サポートまで一貫対応。日本語力・専門知識・社会マナーを備えた即戦力人材を丁寧にご紹介します。',
+        '求人条件のヒアリングから選考サポートまで一貫対応。日本語力・専門知識・社会マナーを備えた即戦力人材をご紹介いたします。',
       imageSrc: '/images/placement.png',
       imageAlt: '人材紹介',
       to: '/placement/',
@@ -100,19 +104,13 @@ export const useSiteContent = () => {
     },
     {
       key: 'aftercare',
+      illust: '/images/illust/house.svg',
+      pillar: 'サポート',
       title: 'アフターケアとサポート',
-      label: 'Aftercare',
       description:
-        '登録支援機関として、特定技能生の就労後サポートを法令に基づき提供。海外からの受け入れに必要な手続きも全て対応。生活相談・学習支援まで継続的に寄り添い、定着率向上をお手伝いします。',
+        '送り出しから受け入れまでに必要な手続きを全て対応いたします。生活相談・学習支援まで継続的に寄り添い、定着率向上をお手伝いします。',
       to: '/aftercare/',
       linkText: 'アフターケアの詳細はこちら',
-    },
-    {
-      key: 'sharehouse',
-      title: 'シェアハウス運営',
-      label: 'Share House',
-      description:
-        'ネパール人専用のシェアハウスを東京都内で運営（順次拡大予定）。来日直後の住居探しの負担を軽減し、生活基盤を早期に安定させることで職場への定着を支援します。',
     },
   ]
 
@@ -121,32 +119,37 @@ export const useSiteContent = () => {
     {
       step: '01',
       title: '求人条件のヒアリング',
+      illust: '/images/illust/office_phone.svg',
       description:
-        '保有資格・日本語力・性格などご希望の求人条件をヒアリングします。またこのとき、大まかな給与などもお聞かせください。',
+        '保有資格・日本語力・性格・在住地（国内外対応）などご希望の求人条件をヒアリングします。',
     },
     {
       step: '02',
       title: '弊社から候補者をご提示',
+      illust: '/images/illust/binders.svg',
       description:
-        '条件に合致し、かつ御社に興味のある候補者の職務履歴書などをご提示します。',
+        '条件に合致し、かつ貴社に興味のある候補者の職務履歴書などをご提示します。',
     },
     {
       step: '03',
-      title: '御社で選考',
+      title: '貴社で選考',
+      illust: '/images/illust/office_documents.svg',
       description:
-        '面接などを通して、実際に選考していただきます。ご希望の場合は、弊社で日本語力などのテストも可能です。',
+        '面接などを通して、実際に選考していただきます。ご希望の場合は、弊社も選考サポートいたします。',
     },
     {
       step: '04',
-      title: '諸調整ののち採用',
+      title: '内定承諾後、就労手続き',
+      illust: '/images/illust/boarding_pass.svg',
       description:
-        '候補者が御社の内定を承諾した場合、正式採用となります。',
+        '候補者が貴社の内定を承諾した場合、ビザ発行等の就労手続きを進めます。',
     },
     {
       step: '05',
-      title: '就労確定後、紹介料のお支払い',
+      title: '就労開始後、紹介料・登録支援費用のお支払い',
+      illust: '/images/illust/rajan_fist_pump.png',
       description:
-        'ビザの発行等、就労できることが確定したのち、紹介料をお支払いいただきます。',
+        '紹介料に加え、就労開始月から登録支援費用のお支払いが発生いたします。',
     },
   ]
 
@@ -154,32 +157,29 @@ export const useSiteContent = () => {
   // 教育ページコンテンツ
   // ─────────────────────────────────────────
 
-  /** 3つの教育活動（SplitListSection 一覧 + 各セクションで使用） */
+  /** 3つの教育活動（教育ページの目次で使用） */
   const educationActivities = [
     {
       key: 'tiktok',
-      label: 'TikTok',
       title: 'TikTokでの日本語学習コンテンツ配信',
       shortDescription:
         '@_rajan_bhandari_ にてネパール語で発信。フォロワー6.8万人（在日ネパール人の約32%）に、難単語の解説・日本文化・マナー・面接のコツなど就労意欲の高いネパール人に刺さるコンテンツを届けています。',
     },
     {
       key: 'school',
-      label: 'School',
       title: 'ネパールでの日本語学校運営',
       shortDescription:
         'UKARU Academyにて初級から上級まで対応。JLPT対策をメインに、会話力など実践的な日本語能力の向上を目指します。',
     },
     {
       key: 'online',
-      label: 'Online Class',
       title: '日本在住ネパール人向けオンラインクラス',
       shortDescription:
         '日本に在留しているネパール人向けのオンラインクラスも開講。就労しながら学べる環境を整え、日本語力・特定技能知識の底上げをサポートします。',
     },
   ]
 
-  /** ダブル教育体制の講師特性（SplitListSection で使用） */
+  /** ダブル教育体制の講師特性 */
   const dualEducationFeatures = [
     {
       key: 'native-japanese',
@@ -205,28 +205,53 @@ export const useSiteContent = () => {
   // トップページコンテンツ
   // ─────────────────────────────────────────
 
-  /** 弊社の強み（SplitListSection / トップページ About セクションで使用） */
+  /** 弊社の強み（トップページ PointList で使用） */
   const pillars = [
     {
       key: 'language-quality',
-      title: '「N3と聞いていたのに…」をなくす独自選考',
-      shortDescription:
-        'JLPT等級だけでなく、弊社独自の会話面接で受け答えのレベルを確認。実際に話せると証明された人材のみをご紹介します。日本語ネイティブのネパール人講師による母語指導が、高い教育水準を支えています。',
+      illust: '/images/illust/teacher.svg',
+      title: '「思っていたより話せない」をなくす独自選考',
+      description:
+        '弊社独自の会話面接で会話のレベルを確認。求められる基準に達している人材のみをご紹介します。',
       to: '/placement/',
+      linkText: '人材紹介について',
     },
     {
       key: 'one-stop',
+      illust: '/images/illust/boarding_pass.svg',
       title: '海外からの受け入れ手続き、まるごとお任せ',
-      shortDescription:
-        '登録支援機関として、特定技能生の受け入れに必要な手続きを全て代行。書類準備から行政対応まで、企業様の負担を最小限に抑えます。',
+      description:
+        '外国人材受け入れに必要な、書類準備から行政対応まで、すべての手続きをお任せいただけます。',
       to: '/aftercare/',
+      linkText: 'アフターケアについて',
     },
     {
       key: 'retention',
+      illust: '/images/illust/care_talk.svg',
       title: '採用後も寄り添い、定着率を高める',
-      shortDescription:
-        '就労後の生活相談・行政手続き支援・継続学習サポートを提供。住居はシェアハウスで確保。教育・紹介・定着まで一貫してお手伝いします。',
+      description:
+        '就労後の生活相談・行政手続き支援・継続学習サポートを提供いたします。',
       to: '/aftercare/',
+      linkText: 'アフターケアについて',
+    },
+  ]
+
+  /** 企業様への3つの約束（企業理念ページで使用） */
+  const promises = [
+    {
+      title: '話せる人材だけをご紹介',
+      description:
+        'JLPTの等級だけに頼らず、独自の会話面接で実際のコミュニケーション能力を確認。「聞いていたより話せない」をなくします。',
+    },
+    {
+      title: '受け入れ手続きをまるごと代行',
+      description:
+        '登録支援機関として、海外からの呼び寄せに必要な手続きを全て対応。企業様の負担を最小限に抑えます。',
+    },
+    {
+      title: '採用後も寄り添い続ける',
+      description:
+        '就労後の生活相談・行政手続き・継続学習まで支援。住居はシェアハウスで確保し、定着率を高めます。',
     },
   ]
 
@@ -437,7 +462,6 @@ export const useSiteContent = () => {
     {
       key: 'company-accommodation',
       industry: '宿泊',
-      industryEn: 'Accommodation',
       challenge: '外国人ゲストへの対応と日常業務を両立できる人材の確保が難しかった',
       solution: '英語・日本語に対応できるネパール人スタッフをご紹介',
       result: '現在も継続就労中',
@@ -447,7 +471,6 @@ export const useSiteContent = () => {
     {
       key: 'company-agriculture',
       industry: '農業',
-      industryEn: 'Agriculture',
       challenge: '農繁期の労働力が慢性的に不足しており、定着する人材がいなかった',
       solution: '農業経験を持つネパール人人材をご紹介',
       result: '現在も継続就労中',
@@ -513,7 +536,7 @@ export const useSiteContent = () => {
   const supportItems = [
     {
       phase: '就労前',
-      label: 'Pre-employment',
+      illust: '/images/illust/airplane.svg',
       items: [
         '特定技能ビザの取得手続き代行',
         '入国・出迎えのサポート',
@@ -524,7 +547,7 @@ export const useSiteContent = () => {
     },
     {
       phase: '就労後',
-      label: 'Post-employment',
+      illust: '/images/illust/house.svg',
       items: [
         '生活上の相談窓口（体調不良・トラブル・ハラスメントなど）',
         '役所手続き・行政書類の支援',
@@ -535,7 +558,7 @@ export const useSiteContent = () => {
     },
     {
       phase: '継続学習',
-      label: 'Ongoing Education',
+      illust: '/images/illust/books.svg',
       items: [
         '希望者への日本語・特定技能の継続授業（要相談）',
         'JLPT対策・スキルアップ支援',
@@ -554,6 +577,7 @@ export const useSiteContent = () => {
     educationActivities,
     dualEducationFeatures,
     pillars,
+    promises,
     strengths,
     stats,
     clients,

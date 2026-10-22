@@ -1,39 +1,27 @@
 <script setup lang="ts">
 /**
- * セクション見出しブロック。
- * タイトル下に secondary カラーのピル形アンダーラインが入る。
+ * セクション見出し（h2）。下に青と水色の短い線を並べる。
+ * inverse：primary で塗った背景の上で使うとき（文字を白にする）。
  */
 interface Props {
-  label?: string
   title?: string
-  align?: 'left' | 'center' | 'right'
-  titleClass?: string
+  inverse?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
-  align: 'center',
-  titleClass: 'text-neutral-800',
+  inverse: false,
 })
 </script>
 
 <template>
-  <div
-    :class="{
-      'text-left': align === 'left',
-      'text-center': align === 'center',
-      'text-right': align === 'right',
-    }"
+  <h2
+    class="text-2xl md:text-3xl font-bold leading-snug tracking-tight"
+    :class="inverse ? 'text-white' : 'text-text'"
   >
-    <p
-      v-if="label"
-      class="text-primary-400 text-sm font-medium tracking-[0.2em] uppercase mb-3"
-    >
-      {{ label }}
-    </p>
-    <h2
-      class="inline-block text-3xl md:text-4xl font-black leading-tight relative pb-5"
-    >
-      <slot>{{ title }}</slot>
-    </h2>
-  </div>
+    <slot>{{ title }}</slot>
+    <span class="flex gap-1.5 mt-4" aria-hidden="true">
+      <span class="block w-8 h-1.5 rounded-full" :class="inverse ? 'bg-white' : 'bg-primary'" />
+      <span class="block w-3 h-1.5 rounded-full" :class="inverse ? 'bg-primary-light' : 'bg-sub'" />
+    </span>
+  </h2>
 </template>

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * 数値ハイライト行。
- * 横一列に stat アイテムを並べる。
- * h-industry の About Us セクションの数字表示パターンを共通化。
+ * 要点の数字の帯（UKARU の c.facts）。
+ * 罫線で区切り、数字は Arial で大きく。note には出典と時点を書く。
  */
 interface StatItem {
   value: string
@@ -19,19 +18,24 @@ defineProps<Props>()
 </script>
 
 <template>
-  <dl class="grid gap-6" :style="`grid-template-columns: repeat(${stats.length}, minmax(0, 1fr))`">
-    <div
-      v-for="stat in stats"
-      :key="stat.label"
-      class="text-center"
+  <div>
+    <dl
+      class="grid border-y border-rule divide-x divide-rule"
+      :style="`grid-template-columns: repeat(${stats.length}, minmax(0, 1fr))`"
     >
-      <dd class="text-3xl md:text-4xl font-black text-primary-400">
-        {{ stat.value }}<span v-if="stat.unit" class="text-xl md:text-2xl">{{ stat.unit }}</span>
-      </dd>
-      <dt class="text-xs text-neutral-400 mt-1">{{ stat.label }}</dt>
-    </div>
-    <p v-if="note" class="col-span-full text-center text-xs text-neutral-400 mt-2">
+      <div
+        v-for="stat in stats"
+        :key="stat.label"
+        class="flex flex-col-reverse px-4 py-3"
+      >
+        <dd class="font-num text-3xl md:text-4xl font-bold text-primary leading-tight mt-1">
+          {{ stat.value }}<span v-if="stat.unit" class="font-sans text-base font-bold text-text ml-1">{{ stat.unit }}</span>
+        </dd>
+        <dt class="text-xs text-muted">{{ stat.label }}</dt>
+      </div>
+    </dl>
+    <p v-if="note" class="text-xs text-muted mt-2">
       {{ note }}
     </p>
-  </dl>
+  </div>
 </template>

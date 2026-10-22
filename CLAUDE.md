@@ -53,18 +53,23 @@ pages/          Nuxt の pages/ ディレクトリ
 | `AppButton` | リンク・ボタン（`to` / `href` / なし で自動切替） |
 | `SlideLink` | ページ内の目次リンク（`#id` へ。下線つき。矢印・動きなし） |
 | `IconArrow` | 右矢印アイコン（トップのヒーローのボタンでのみ使用） |
+| `RajanWalk` | 代表が歩いてきて立ち止まるイラスト（`rajan_walk.svg`。画面に入ってから読み込んで1回動く。高さは `class` で） |
 | `IllustImage` | illustkit のイラスト（`src` は `/images/illust/...`。飾りなら alt なし。`eager` でヒーロー用） |
 | `IconPhone` | 電話アイコン |
 | `BilingualText` | ネパール語の文の下に日本語を小さく薄く添える（`text` に `{ ne, ja }`。`tag` で要素を指定。UKARU ONLINE ページ用） |
-| `RubyText` | 「漢字[よみ]」の書き方の文をふりがなつきで表示（教材の見本用） |
+| `RubyText` | 「漢字[よみ]」の書き方の文をふりがなつきで表示（教材の特長の図で使う） |
 | `SubHeading` | 小見出し h3/h4（左にロゴの青の線） |
 | `TagBadge` | 小さな丸いラベル（primary / soft / outline / line） |
 | `SectionHeading` | セクション見出し（h2 + 下にロゴの青と灰青の短い線。`inverse` で白） |
 | `BusinessCard` | 画像つきの紹介ブロック（外枠なし。画像・小見出し・説明・箇条書きまたはリンク） |
 | `StatRow` | 数字の帯（`font-num` の大きな数字。`note` に出典と時点） |
-| `FlowSteps` | 流れ図（角の丸い箱を矢印でつなぐ。3つまでは横に並べ、4つ以上は箱が小さくならないよう縦に1行ずつ。`illust` でイラスト。`goalLast` で最後を塗る） |
+| `FlowSteps` | 流れ図（角の丸い箱を矢印でつなぐ。3つまでは横に並べ、4つ以上は箱が小さくならないよう縦に1行ずつ。`illust` でイラスト。`goalLast` で最後を塗る。`title`・`description` は `{ ne, ja }` も可。そのときは `goalLast` を使わない） |
+| `ExamParts` | 試験の構成図（学科・実技、A・B・C などのパートを角の丸い箱で横に並べる。`value` で問題数などを大きく、`weight` で幅の比、`note` に合格の基準） |
+| `BarList` | 横棒のグラフ（1系列だけ。primary の1色の細い棒、値は文字色で右に。`<table>` で組む。`note` に出典と時点） |
+| `AccordionItem` | 折りたたみ（`details`。丸い板のイラスト + h2 + 短い説明 + 右に + / −。罫線で区切る。`id` の `#id` で来たら開く。開閉の動きなし） |
+| `DocumentViewer` | 資料（PDF）を読むダイアログ（`dialog`。ページごとの画像を縦に並べて中でスクロール。`v-model:open`。Esc・背景・✕ で閉じる）。PDF はそのまま埋め込まず、ページを画像（webp）にして渡す（スマホで PDF を埋め込むと読めないため） |
 | `InfoTable` | 項目と内容の表（会社概要・許可番号など） |
-| `PointList` | 順序のない要点の一覧（左に見出し、右に説明。行を罫線で区切る。番号は付けない。`illust` で丸いイラスト） |
+| `PointList` | 順序のない要点の一覧（左に見出し、右に説明。行を罫線で区切る。番号は付けない。`illust` で丸いイラスト。`link`（`to` / `href` + `label`）で説明の下に別ページへのボタン。`href` は新しいタブ） |
 | `CheckList` | 箇条書き（四角の小さな印） |
 | `SpeechBubble` | 代表の吹き出し（要所だけで使う） |
 | `CommentBubble` | 一言そえる吹き出し（UKARU の `c.comment`。丸い顔 + 名前 + 吹き出し。`faceSrc` は illustkit のキャラクターの顔（`/images/illust/face_<who>.svg`）。`side` は学習者が右・それ以外が左。`tone` は line / primary） |
@@ -195,11 +200,14 @@ const props = withDefaults(defineProps<Props>(), {
     primary の塗りは人材紹介ページの「完全成功報酬」の1か所だけ
   - コンテナは全セクション `max-w-6xl` で左端をそろえ、文章の行長は `max-w-3xl` で抑える
   - 動きは「スクロールで現れるフェード」と「操作に対する色の変化」だけ。ホバーでの移動は付けない
-    - 例外：トップのヒーローの代表のイラスト（`public/images/rajan_walk.svg`）だけ、歩いてきて立ち止まる動きを1回付ける。
+    - 例外：代表の歩くイラスト（`public/images/rajan_walk.svg`。`RajanWalk`）だけ、歩いてきて立ち止まる動きを1回付ける。
+      使うのはコーポレートのトップのヒーローと、UKARU ONLINE の教師のページの「代表」の2か所だけ。
       SVG は `scripts/build_rajan_walk.py` で `rajan.svg` から作る（手で編集しない）。他のイラストには動きを付けない
     - 例外：UKARU ONLINE のトップのヒーロー（`OnlineHero`）の背景だけ、職業のイラストの列（`ukaruOnline.heroJobs`）を
       上下2列でゆっくり流す。下は右から左（`motion-safe:animate-marquee`）、上は逆向き（`motion-safe:animate-marquee-reverse`）。
       どちらも `app.css` の `@theme`
+    - 例外：UKARU ONLINE のトップの「UKARU とは」のロゴの円（`public/images/ukaru/ukaru_mark.svg`）だけ、
+      ゆっくり時計回りに回す（`motion-safe:animate-spin-slow`。`app.css` の `@theme`）。ほかのロゴは回さない
   - フェードは `plugins/reveal.ts`。ヒーローより下のセクションの中身には自動で付く（並んだ項目は時間差）。
     付けたくないセクションには `data-no-reveal` を付ける
   - ヒーロー（トップ・`PageHero`）は `v-reveal="遅れms"` で要素を上から順に出す。新しいフェードの CSS を個別に書かない
@@ -304,6 +312,9 @@ UKARU ONLINE は別サイトとして `online/` に置く。ルート（コー�
 - 文言・教科・教材の内容は `useSiteContent` の `ukaruOnline` にまとめる。元の情報は Drive の `UKARU/Ukaru_Online`（読むだけ。編集しない）
 - ネパール語の文章は公開前にネパール人の先生に確認してもらう
 - 生徒の申し込みは Facebook のメッセージ（`OnlineApplyButton`）。企業向けは `RelatedLinks` でコーポレートサイトへ
+- ページ：トップ・クラス（`classes`。クラスごとに `AccordionItem` で折りたたみ、中に どんな試験（`ExamParts`）/ 数字（`StatRow`・`BarList`。合格率・勉強時間の目安）/ 資格までの流れ（`FlowSteps`）/ UKARU のクラス）・教師（`teachers`）・教材（`materials`。上に特長（`materialFeatures`。罫線の行で左に文・右に N5 第1課から写した図）、下にチラ見せ（代表の `CommentBubble` + JLPT の主教材・漢字・単語は N5 第1課だけを `DocumentViewer` で見せる。画像は `public/images/ukaru/materials/`。ほかの課は載せない。介護・特定技能の教材は載せない）・UKARU について（`about`）
+- 介護福祉士の専用のページは作らない（クラスのページの介護福祉士にまとめる。トップからは `/classes/#kaigo` で開いて見せる）
+- 先生の名前は社内の時間割にしか載っていないので、公開の OK をもらうまで載せない
 - コーポレートの旧 URL `/ukaru-online/` は Amplify のリダイレクトで online.suns-son.jp へ送る
 - サイトをまたぐリンクは `useSiteContent` の `siteUrls`（`corporate` / `online`）から作る。URL を直書きしない
 - ルートの `nuxt.config.ts` は `online/**` を読まない。パスは `here()` でルート基準にしている（layer から使われても壊れないように）

@@ -7,6 +7,7 @@ useSeoMeta({
 
 const { company, siteUrls, ukaruOnline } = useSiteContent()
 const { about } = ukaruOnline
+const markUrl = usePublicUrl('/images/ukaru/ukaru_mark.svg')
 
 const operatorRows = [
   { label: { ne: 'सञ्चालक', ja: '運営会社' }, value: company.name, href: `${siteUrls.corporate}/` },
@@ -20,18 +21,29 @@ const operatorRows = [
     <PageHero
       :title="{ ne: 'UKARU बारे', ja: 'UKARU について' }"
       home-label="UKARU ONLINE"
-      illust="/images/illust/teacher.svg"
+      illust="/images/illust/rajan_offering.png"
     >
       <template #description>
         <BilingualText :text="about.lead" class="text-base md:text-lg leading-relaxed text-text" />
+      </template>
+      <!-- 差し出した両手の上に、UKARU のロゴの円を浮かべる（回さない） -->
+      <template #illust>
+        <img :src="markUrl" alt="" class="absolute left-0 bottom-3/5 h-10 lg:h-12 w-auto" fetchpriority="high" loading="eager" />
       </template>
     </PageHero>
 
     <!-- ===== 1. 名前の由来 ===== -->
     <section class="py-16 md:py-24 bg-white">
-      <div class="max-w-6xl mx-auto px-6">
-        <SectionHeading :title="{ ne: 'UKARU नामको अर्थ', ja: '名前の由来' }" class="mb-6" />
-        <BilingualText :text="about.nameStory" class="text-base md:text-lg leading-relaxed max-w-3xl" />
+      <div class="max-w-6xl mx-auto px-6 md:grid md:grid-cols-12 md:gap-10 md:items-center">
+        <div class="md:col-span-8">
+          <SectionHeading :title="{ ne: 'UKARU नामको अर्थ', ja: '名前の由来' }" class="mb-6" />
+          <BilingualText :text="about.nameStory" class="text-base md:text-lg leading-relaxed max-w-3xl" />
+        </div>
+        <div class="md:col-span-4 mt-10 md:mt-0 flex justify-center">
+          <div class="w-56 h-56 lg:w-64 lg:h-64 rounded-full bg-primary-bg flex items-end justify-center overflow-hidden">
+            <IllustImage src="/images/illust/rajan_party.png" class="h-5/6 w-auto" />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -49,7 +61,7 @@ const operatorRows = [
         </div>
         <div class="md:col-span-4 mt-10 md:mt-0 flex justify-center">
           <div class="w-56 h-56 lg:w-64 lg:h-64 rounded-full bg-primary-bg flex items-end justify-center overflow-hidden">
-            <IllustImage src="/images/illust/rajan_offering.png" class="h-5/6 w-auto" />
+            <IllustImage src="/images/illust/rajan_suit.png" class="h-5/6 w-auto" />
           </div>
         </div>
       </div>

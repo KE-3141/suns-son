@@ -6,11 +6,15 @@
  * 4つ以上：横に並べると箱が小さくなるので、常に縦に1行ずつ並べる（md 以上は左にイラスト・右に文章）。
  * illust があれば箱にイラストを置く。bust：人のイラストを上半身だけ見えるように大きくする（下は箱で切る）。
  * goalLast：最後の箱を塗る（ゴール・いちばん伝えたい所）。
+ * title・description に { ne, ja } を渡すと、ネパール語の下に日本語を小さく添える（BilingualText）。
+ *   日本語は薄い色で出るので、{ ne, ja } のときは goalLast を使わない。
  */
+import type { Bilingual } from '~/types/bilingual'
+
 interface Step {
   step?: string | number
-  title: string
-  description?: string
+  title: string | Bilingual
+  description?: string | Bilingual
   illust?: string
   bust?: boolean
 }
@@ -30,7 +34,7 @@ const isGoal = (index: number) => props.goalLast && index === props.steps.length
 
 <template>
   <ol class="flex flex-col" :class="isRows ? 'max-w-4xl' : 'lg:flex-row lg:items-stretch'">
-    <template v-for="(step, index) in steps" :key="step.title">
+    <template v-for="(step, index) in steps" :key="index">
       <li
         class="flex-1 min-w-0 border-2 border-primary rounded-2xl"
         :class="[
@@ -70,18 +74,17 @@ const isGoal = (index: number) => props.goalLast && index === props.steps.length
             >
               {{ step.step }}
             </span>
-            {{ step.title }}
+            <BilingualText tag="span" :text="step.title" />
           </p>
-          <p
+          <BilingualText
             v-if="step.description"
+            :text="step.description"
             class="leading-relaxed"
             :class="[
               isGoal(index) ? 'text-white' : 'text-text',
               isRows ? 'text-base mt-3' : 'text-sm mt-2',
             ]"
-          >
-            {{ step.description }}
-          </p>
+          />
         </div>
       </li>
       <li

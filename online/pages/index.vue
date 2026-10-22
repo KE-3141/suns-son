@@ -7,13 +7,7 @@ useSeoMeta({
 
 const { ukaruOnline } = useSiteContent()
 const { kaigo } = ukaruOnline
-
-const classCount = ukaruOnline.schedule.groups.reduce((sum, group) => sum + group.classes.length, 0)
-const stats = [
-  { value: String(classCount), unit: 'クラス', label: 'कक्षा / クラス' },
-  { value: '1', unit: '時間', label: 'एक पटक / 1回' },
-  { value: '3〜5', unit: '日', label: 'हप्तामा / 週' },
-]
+const logoMarkUrl = usePublicUrl('/images/ukaru/ukaru_mark.svg')
 </script>
 
 <template>
@@ -26,17 +20,16 @@ const stats = [
       <div class="max-w-6xl mx-auto px-6 md:grid md:grid-cols-12 md:gap-10 md:items-center">
         <div class="md:col-span-7">
           <SectionHeading :title="{ ne: 'UKARU भनेको के हो?', ja: 'UKARU とは' }" class="mb-8" />
-          <BilingualText :text="ukaruOnline.intro" class="text-base md:text-lg leading-relaxed max-w-3xl mb-10" />
-          <StatRow
-            :stats="stats"
-            :note="`${ukaruOnline.schedule.month.ja}の時間割による（日本に住む人のクラス）`"
-            class="max-w-lg"
-          />
+          <BilingualText :text="ukaruOnline.intro" class="text-base md:text-lg leading-relaxed max-w-3xl" />
         </div>
         <div class="md:col-span-5 mt-12 md:mt-0 flex justify-center">
-          <div class="w-64 h-64 lg:w-80 lg:h-80 rounded-full bg-primary-bg flex items-center justify-center">
-            <IllustImage src="/images/illust/study_computer.svg" class="h-3/4 w-auto" />
-          </div>
+          <!-- ロゴの円だけを、ゆっくり時計回りに回す（飾りなので読み上げない） -->
+          <img
+            :src="logoMarkUrl"
+            alt=""
+            loading="lazy"
+            class="w-64 h-64 lg:w-80 lg:h-80 motion-safe:animate-spin-slow"
+          />
         </div>
       </div>
     </section>
@@ -70,18 +63,18 @@ const stats = [
         </ul>
 
         <AppButton to="/classes/" variant="secondary" class="mt-8">
-          <span lang="ne">कक्षाको विवरण र समय तालिका</span>
+          <span lang="ne">कक्षाको विवरण</span>
         </AppButton>
       </div>
     </section>
 
-    <!-- ===== 5. 介護福祉士（次の試験の日） ===== -->
+    <!-- ===== 5. 介護福祉士（次の試験の日。くわしくはクラスのページの介護福祉士を開いて見せる） ===== -->
     <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6 md:grid md:grid-cols-12 md:gap-10 md:items-end">
         <div class="md:col-span-8">
           <SectionHeading :title="{ ne: 'कइगो फुकुशिशी परीक्षा', ja: '介護福祉士の試験' }" class="mb-6" />
           <BilingualText :text="kaigo.lead" class="text-base md:text-lg leading-relaxed max-w-3xl" />
-          <AppButton to="/kaigo/" variant="secondary" class="mt-8">
+          <AppButton to="/classes/#kaigo" variant="secondary" class="mt-8">
             <span lang="ne">परीक्षा र UKARU को कक्षाबारे</span>
           </AppButton>
         </div>

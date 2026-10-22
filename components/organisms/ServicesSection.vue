@@ -32,7 +32,7 @@ const { services } = useSiteContent()
           <h3 class="text-lg md:text-xl font-bold leading-snug text-text mb-2">{{ service.title }}</h3>
           <p class="text-base leading-relaxed text-text mb-5">{{ service.description }}</p>
           <div class="border-l-2 border-primary pl-4 mb-5">
-            <TagBadge variant="primary" class="mb-2">POINT</TagBadge>
+            <p class="font-display text-sm font-bold text-primary-deep mb-1">POINT</p>
             <p class="font-bold leading-snug text-text mb-1">{{ service.point.title }}</p>
             <p class="text-sm leading-relaxed text-muted">{{ service.point.description }}</p>
           </div>

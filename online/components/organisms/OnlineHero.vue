@@ -52,7 +52,7 @@ const jobRows = [
         <div v-reveal="650" class="flex flex-col sm:flex-row sm:items-start gap-4">
           <OnlineApplyButton size="lg" />
           <AppButton to="/classes/" size="lg" variant="secondary">
-            <span lang="ne">कक्षा र समय तालिका</span>
+            <span lang="ne">कक्षाहरू</span>
           </AppButton>
         </div>
       </div>

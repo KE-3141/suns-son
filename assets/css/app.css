@@ -66,6 +66,16 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
+  /*
+   * ゆっくり時計回りに回る（UKARU ONLINE のトップの「UKARU とは」のロゴの円だけ）。
+   * Tailwind の animate-spin（1秒で1回転）は速すぎるので、別に用意する。motion-safe: を付けて使う。
+   */
+  --animate-spin-slow: spin-slow 24s linear infinite;
+
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
 }
 
 /*

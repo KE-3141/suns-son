@@ -1,12 +1,5 @@
 <script setup lang="ts">
 const worldMapUrl = usePublicUrl('/images/world_map.svg')
-const rajanWalkUrl = usePublicUrl('/images/rajan_walk.svg')
-
-// 歩くイラストは SVG の読み込みと同時に動き出すので、ヒーローの文字と同じくブラウザで表示が始まってから読み込む
-const isMounted = ref(false)
-onMounted(() => {
-  isMounted.value = true
-})
 
 useHead({ title: "Sun's Son株式会社 | 外国人留学生ご紹介サービス" })
 useSeoMeta({
@@ -61,15 +54,7 @@ const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(company.addre
         </div>
 
         <!-- 代表が右上から歩いてきて立ち止まる（動きは SVG の中。scripts/build_rajan_walk.py で作る） -->
-        <div class="h-64 md:h-80 lg:h-96 mt-10">
-          <img
-            v-if="isMounted"
-            :src="rajanWalkUrl"
-            :alt="`代表 ${company.ceo}`"
-            class="h-full w-auto"
-            loading="eager"
-          />
-        </div>
+        <RajanWalk :alt="`代表 ${company.ceo}`" class="h-64 md:h-80 lg:h-96 mt-10" />
       </div>
     </section>
 
@@ -105,8 +90,15 @@ const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(company.addre
           </div>
 
           <div class="order-3 lg:order-2 flex flex-col items-center">
-            <p class="bg-primary-bg rounded-2xl rounded-br-none px-6 py-4 text-lg md:text-xl font-bold leading-snug text-primary text-center">
-              Sun's Sonに<br>おまかせください！
+            <!-- 左右の斜めの線2本ずつ（＼ ／）で、代表が喋っているように見せる -->
+            <p class="flex items-center justify-center gap-4 text-lg md:text-xl font-bold leading-snug text-text text-center">
+              <span class="flex gap-2" aria-hidden="true">
+                <span v-for="n in 2" :key="n" class="block w-0.5 h-6 rounded-full bg-primary -rotate-30" />
+              </span>
+              <span>Sun's Sonに<br>おまかせください！</span>
+              <span class="flex gap-2" aria-hidden="true">
+                <span v-for="n in 2" :key="n" class="block w-0.5 h-6 rounded-full bg-primary rotate-30" />
+              </span>
             </p>
             <IllustImage
               src="/images/illust/rajan_one_more.png"

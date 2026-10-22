@@ -23,7 +23,7 @@ const consistentFlow = [
     <!-- ===== 1. ページヒーロー ===== -->
     <PageHero
       illust="/images/illust/care_worker.svg"
-      :parent="{ to: '/business/', label: '事業内容' }"
+      :parents="[{ to: '/business/', label: '事業内容' }]"
       title="アフターケアとサポート"
       description="採用して終わりにしない。ビザ取得から生活相談・継続学習まで、企業様と就労者の双方に寄り添い続けます。"
     />

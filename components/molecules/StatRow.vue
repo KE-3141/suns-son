@@ -26,9 +26,9 @@ defineProps<Props>()
       <div
         v-for="stat in stats"
         :key="stat.label"
-        class="flex flex-col-reverse px-4 py-3"
+        class="flex flex-col-reverse justify-end px-3 md:px-4 py-3"
       >
-        <dd class="font-num text-3xl md:text-4xl font-bold text-primary leading-tight mt-1">
+        <dd class="font-num text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-tight whitespace-nowrap mt-1">
           {{ stat.value }}<span v-if="stat.unit" class="font-sans text-base font-bold text-text ml-1">{{ stat.unit }}</span>
         </dd>
         <dt class="text-xs text-muted">{{ stat.label }}</dt>

@@ -21,7 +21,12 @@ const profileRows = [
 <template>
   <main>
     <!-- ===== 1. ページヒーロー ===== -->
-    <PageHero illust="/images/illust/rajan_offering.png" title="企業理念" />
+    <PageHero illust="/images/illust/rajan_offering.png" title="企業理念">
+      <!-- 差し出した両手の上に、ロゴの耳を浮かべる -->
+      <template #illust>
+        <img :src="logoUrl" alt="" class="absolute left-1/12 bottom-2/3 h-10 lg:h-12 w-auto" fetchpriority="high" loading="eager" />
+      </template>
+    </PageHero>
 
     <!-- ===== 2. 理念 ===== -->
     <section class="py-16 md:py-24 bg-white">
@@ -61,7 +66,7 @@ const profileRows = [
 
         <!-- カルナの神話 + ロゴ -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start mb-14">
-          <div class="flex items-center justify-center md:justify-start">
+          <div class="flex items-center justify-center md:self-stretch">
             <img
               :src="logoUrl"
               :alt="`${company.name} ロゴ`"

@@ -14,7 +14,7 @@ useSeoMeta({
     "Sun's Son株式会社は「教育」×「紹介」×「サポート」で、日本語・特定技能教育から生活サポートまで一貫して提供する外国人人材紹介会社です。",
 })
 
-const { company, pillars, referralFlows } = useSiteContent()
+const { company, worries, referralFlows } = useSiteContent()
 
 const companyRows = [
   { label: '会社名', value: company.name },
@@ -73,7 +73,7 @@ const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(company.addre
       </div>
     </section>
 
-    <!-- ===== 2. 会社について + 選ばれる理由 ===== -->
+    <!-- ===== 2. 会社について ===== -->
     <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6">
         <SectionHeading class="mb-8">
@@ -85,7 +85,36 @@ const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(company.addre
           初めて外国人材採用をされる企業様にも、初めて日本で働く人材にも、安心していただけるサポートをお約束いたします。
         </p>
 
-        <PointList :items="pillars" />
+        <!-- 企業様・生徒のお悩みをコメントで並べ、代表が「おまかせください」と答える -->
+        <!-- モバイル：企業様 → 生徒 → 代表。デスクトップ：企業様 | 代表 | 生徒 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-10 lg:items-center">
+          <div
+            v-for="group in worries"
+            :key="group.key"
+            :class="['space-y-5', group.side === 'left' ? 'order-1' : 'order-2 lg:order-3']"
+          >
+            <CommentBubble
+              v-for="item in group.items"
+              :key="item.name"
+              :name="item.name"
+              :face-src="item.face"
+              :side="group.side"
+            >
+              {{ item.text }}
+            </CommentBubble>
+          </div>
+
+          <div class="order-3 lg:order-2 flex flex-col items-center">
+            <p class="bg-primary-bg rounded-2xl rounded-br-none px-6 py-4 text-lg md:text-xl font-bold leading-snug text-primary text-center">
+              Sun's Sonに<br>おまかせください！
+            </p>
+            <IllustImage
+              src="/images/illust/rajan_one_more.png"
+              :alt="`代表 ${company.ceo}`"
+              class="h-64 md:h-72 w-auto mt-3"
+            />
+          </div>
+        </div>
       </div>
     </section>
 

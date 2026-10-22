@@ -55,18 +55,22 @@ pages/          Nuxt の pages/ ディレクトリ
 | `IconArrow` | 右矢印アイコン（トップのヒーローのボタンでのみ使用） |
 | `IllustImage` | illustkit のイラスト（`src` は `/images/illust/...`。飾りなら alt なし。`eager` でヒーロー用） |
 | `IconPhone` | 電話アイコン |
+| `BilingualText` | ネパール語の文の下に日本語を小さく薄く添える（`text` に `{ ne, ja }`。`tag` で要素を指定。UKARU ONLINE ページ用） |
+| `RubyText` | 「漢字[よみ]」の書き方の文をふりがなつきで表示（教材の見本用） |
 | `SubHeading` | 小見出し h3/h4（左にロゴの青の線） |
 | `TagBadge` | 小さな丸いラベル（primary / soft / outline / line） |
 | `SectionHeading` | セクション見出し（h2 + 下にロゴの青と灰青の短い線。`inverse` で白） |
 | `BusinessCard` | 画像つきの紹介ブロック（外枠なし。画像・小見出し・説明・箇条書きまたはリンク） |
 | `StatRow` | 数字の帯（`font-num` の大きな数字。`note` に出典と時点） |
-| `FlowSteps` | 流れ図（角の丸い箱を → でつなぐ。`illust` で箱の上にイラスト。`goalLast` で最後を塗る） |
+| `FlowSteps` | 流れ図（角の丸い箱を矢印でつなぐ。3つまでは横に並べ、4つ以上は箱が小さくならないよう縦に1行ずつ。`illust` でイラスト。`goalLast` で最後を塗る） |
 | `InfoTable` | 項目と内容の表（会社概要・許可番号など） |
 | `PointList` | 順序のない要点の一覧（左に見出し、右に説明。行を罫線で区切る。番号は付けない。`illust` で丸いイラスト） |
 | `CheckList` | 箇条書き（四角の小さな印） |
 | `SpeechBubble` | 代表の吹き出し（要所だけで使う） |
+| `CommentBubble` | 一言そえる吹き出し（UKARU の `c.comment`。丸い顔 + 名前 + 吹き出し。`faceSrc` は illustkit のキャラクターの顔（`/images/illust/face_<who>.svg`）。`side` は学習者が右・それ以外が左。`tone` は line / primary） |
 | `RelatedLinks` | ページ下部の関連ページ誘導 |
-| `PageHero` | 内部ページ共通ヒーロー（淡い青背景 + パンくず + h1 + 説明文。`parent` で親ページ、`illust` で右にイラスト） |
+| `OnlineApplyButton` | UKARU ONLINE の受講申し込みボタン（Facebook のメッセージ。`note` で下の日本語の案内を出すか） |
+| `PageHero` | 内部ページ共通ヒーロー（淡い青背景 + パンくず + h1 + 説明文。`parents` で親ページを上の階層から順に、`#description` スロットで説明文の位置に自由な中身、`illust` で右にイラスト、`:breadcrumb="false"` でパンくずなし） |
 | `ServicesSection` | 事業内容（イラストの板 + 事業を1行ずつ。`title` で見出し変更） |
 | `StepsSection` | 見出し + 流れ図 |
 | `CtaSection` | ページ末尾 CTA（電話番号 + お問い合わせボタン + ラジャンのイラスト） |
@@ -175,9 +179,10 @@ const props = withDefaults(defineProps<Props>(), {
 - フォント（`nuxt.config.ts` の `fonts` と `app.css` の `@theme`）
   - 日本語は見出しも本文も Zen Kaku Gothic New（スマートさ）。h1 は `font-black`、h2 以下は `font-bold`
   - 見出しの英字と数字は Outfit（`font-display` / `font-num`。少し丸みのあるポップさ）。h1〜h4 には `app.css` で自動で当たる
+  - ネパール語は Noto Sans Devanagari（上のフォントにデーヴァナーガリーの字がないので、その字だけここで出る）
   - 丸ゴシック（Zen Maru Gothic など）は丸っこすぎるので使わない。Noto Sans JP など既定のフォントにも戻さない
   - 見出し（h1〜h4）のひらがなは少し小さく表示する（`app.css` の `Heading Kana`。`assets/fonts/` のひらがなだけのファイルに `size-adjust` をかけている）。見出しにひらがなを小さくするための `<span>` を書かない
-- **使わないもの**: グラデーション、影（shadow / drop-shadow）、ぼかし（backdrop-blur）、絵文字、
+- **使わないもの**: グラデーション、影（shadow / drop-shadow）、ぼかし（backdrop-blur。例外：ヘッダーのすりガラス）、絵文字、
   飾りだけのアイコン、
   イタリック、英語ラベルの大文字＋字間あけ、ダッシュ（—, ―）。記号は ○ ✕ → + を使う
 - 区切りは 1px の罫線（`border-rule`）と余白で行う。白い文字は塗りの背景の上でだけ使う
@@ -192,6 +197,9 @@ const props = withDefaults(defineProps<Props>(), {
   - 動きは「スクロールで現れるフェード」と「操作に対する色の変化」だけ。ホバーでの移動は付けない
     - 例外：トップのヒーローの代表のイラスト（`public/images/rajan_walk.svg`）だけ、歩いてきて立ち止まる動きを1回付ける。
       SVG は `scripts/build_rajan_walk.py` で `rajan.svg` から作る（手で編集しない）。他のイラストには動きを付けない
+    - 例外：UKARU ONLINE のトップのヒーロー（`OnlineHero`）の背景だけ、職業のイラストの列（`ukaruOnline.heroJobs`）を
+      上下2列でゆっくり流す。下は右から左（`motion-safe:animate-marquee`）、上は逆向き（`motion-safe:animate-marquee-reverse`）。
+      どちらも `app.css` の `@theme`
   - フェードは `plugins/reveal.ts`。ヒーローより下のセクションの中身には自動で付く（並んだ項目は時間差）。
     付けたくないセクションには `data-no-reveal` を付ける
   - ヒーロー（トップ・`PageHero`）は `v-reveal="遅れms"` で要素を上から順に出す。新しいフェードの CSS を個別に書かない
@@ -285,7 +293,27 @@ useSeoMeta({
 
 ---
 
-## 10. ディレクトリ構成（参考）
+## 10. UKARU ONLINE のサイト（online.suns-son.jp）
+
+UKARU ONLINE は別サイトとして `online/` に置く。ルート（コーポレートサイト）を土台（Nuxt の layer）にしているので、
+部品・色・フォント・`useSiteContent` はそのまま共有する。
+
+- ページは `online/pages/` のものだけを使う（`online/nuxt.config.ts` の `pages:extend` でコーポレートのページを外す）
+- ヘッダー・フッターは `online/components/organisms/`（`OnlineHeader` / `OnlineFooter`）
+- 本文はネパール語。下に小さく薄く日本語を添える（`BilingualText`。`PointList`・`SectionHeading` も `{ ne, ja }` を受け取る）
+- 文言・教科・教材の内容は `useSiteContent` の `ukaruOnline` にまとめる。元の情報は Drive の `UKARU/Ukaru_Online`（読むだけ。編集しない）
+- ネパール語の文章は公開前にネパール人の先生に確認してもらう
+- 生徒の申し込みは Facebook のメッセージ（`OnlineApplyButton`）。企業向けは `RelatedLinks` でコーポレートサイトへ
+- コーポレートの旧 URL `/ukaru-online/` は Amplify のリダイレクトで online.suns-son.jp へ送る
+- サイトをまたぐリンクは `useSiteContent` の `siteUrls`（`corporate` / `online`）から作る。URL を直書きしない
+- ルートの `nuxt.config.ts` は `online/**` を読まない。パスは `here()` でルート基準にしている（layer から使われても壊れないように）
+- Tailwind は `app.css` の `@source "../.."` でリポジトリ全体のクラスを拾う（消すと online のビルドで共通部品の見た目が崩れる）
+- 手元：`npm run dev:online`（port 3001）。ビルド：`npm run generate:online` → `online/.output/public`
+- Amplify：同じリポジトリから2つのアプリを作り、online のアプリにだけ環境変数 `SITE=online` を付ける（`amplify.yml` が切り替える）
+
+---
+
+## 11. ディレクトリ構成（参考）
 
 ```
 suns-son/
@@ -309,6 +337,7 @@ suns-son/
       AppFooter.vue             グローバルフッター
       CtaSection.vue            ページ末尾 CTA（電話番号 + お問い合わせボタン）
   pages/                        各ページ（index / about / business / ...）
+  online/                       UKARU ONLINE のサイト（ルートを layer にした別の Nuxt アプリ）
   public/images/                静的画像ファイル
   docs/                         設計ドキュメント
 ```

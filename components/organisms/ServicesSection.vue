@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 事業内容セクション。教育・紹介・サポートの3事業を1行ずつ並べる。
- * 左にイラストの丸い板、右に柱の言葉・事業名・説明・リンク。
+ * 左にイラストの丸い板、右に事業名・説明・POINT（その事業の強み）・リンク。
  * index.vue と business.vue で共用。
  */
 interface Props {
@@ -29,11 +29,13 @@ const { services } = useSiteContent()
           <IllustImage :src="service.illust" class="h-full w-auto" />
         </div>
         <div class="md:col-span-8">
-          <p class="inline-block text-lg font-bold text-white bg-primary rounded-full px-4 mb-3">
-            {{ service.pillar }}
-          </p>
           <h3 class="text-lg md:text-xl font-bold leading-snug text-text mb-2">{{ service.title }}</h3>
-          <p class="text-base leading-relaxed text-text mb-4">{{ service.description }}</p>
+          <p class="text-base leading-relaxed text-text mb-5">{{ service.description }}</p>
+          <div class="border-l-2 border-primary pl-4 mb-5">
+            <TagBadge variant="primary" class="mb-2">POINT</TagBadge>
+            <p class="font-bold leading-snug text-text mb-1">{{ service.point.title }}</p>
+            <p class="text-sm leading-relaxed text-muted">{{ service.point.description }}</p>
+          </div>
           <AppButton :to="service.to" variant="secondary">
             {{ service.linkText }}
           </AppButton>

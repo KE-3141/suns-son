@@ -112,7 +112,7 @@ const licenseRows = [
     <!-- ===== 1. ページヒーロー ===== -->
     <PageHero
       illust="/images/illust/traveler.svg"
-      :parent="{ to: '/business/', label: '事業内容' }"
+      :parents="[{ to: '/business/', label: '事業内容' }]"
       title="人材紹介"
       description="「話せる」と証明された人材だけをご紹介します。求人条件のヒアリングから就労後サポートまで一貫対応。"
     />

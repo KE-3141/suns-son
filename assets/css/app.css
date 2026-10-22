@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+/*
+ * クラスを探す範囲をリポジトリ全体にする。
+ * UKARU ONLINE（online/）はここを土台にビルドするが、そのままだと online/ の中しか見ず、
+ * 共通部品（components/）のクラスが CSS に入らない。
+ */
+@source "../..";
+
 @theme {
   /*
    * UKARU テーマの色。
@@ -38,12 +45,27 @@
    * 日本語：見出しも本文も Zen Kaku Gothic New（スマート）
    * 見出しの英字と数字：Outfit（少し丸みがあってポップ）
    * 見出しのひらがな：Heading Kana（Zen Kaku Gothic New のひらがなを少し小さく。下の @font-face）
+   * ネパール語：Noto Sans Devanagari（上のフォントに字がないので、デーヴァナーガリーだけここで出る）
    */
   --font-sans:
     'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
-    'Yu Gothic', 'Meiryo', sans-serif;
-  --font-display: 'Outfit', 'Heading Kana', 'Zen Kaku Gothic New', sans-serif;
+    'Yu Gothic', 'Meiryo', 'Noto Sans Devanagari', sans-serif;
+  --font-display: 'Outfit', 'Heading Kana', 'Zen Kaku Gothic New', 'Noto Sans Devanagari', sans-serif;
   --font-num: 'Outfit', 'Zen Kaku Gothic New', sans-serif;
+
+  /*
+   * 横にゆっくり流れる帯（UKARU ONLINE のトップのヒーローの、職業のイラストの列）。
+   * 中身を2回並べ、半分（1回分）動いたら最初に戻ると、つなぎ目なく流れ続ける。
+   * marquee は右から左、marquee-reverse は左から右。
+   * motion-safe: を付けて使い、動きを減らす設定の人には動かさない。
+   */
+  --animate-marquee: marquee 90s linear infinite;
+  --animate-marquee-reverse: marquee 90s linear infinite reverse;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 /*

@@ -19,7 +19,7 @@ const navLinkClass = 'flex items-center gap-1 px-3 h-16 text-sm font-bold text-t
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-white border-b border-rule">
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md backdrop-saturate-150 border-b border-rule/70">
     <div class="max-w-6xl mx-auto px-6">
       <div class="flex items-center h-16 gap-4">
         <!-- ロゴ + 社名 -->

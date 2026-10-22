@@ -7,6 +7,7 @@ interface Step {
   title: string
   description: string
   illust?: string
+  bust?: boolean
 }
 
 interface Props {

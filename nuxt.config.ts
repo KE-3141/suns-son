@@ -1,10 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { fileURLToPath } from 'node:url'
+
+// online/（UKARU ONLINE のサイト）はこの設定を土台（layer）として読み込む。
+// そのとき `~` は online/ を指すので、共通のファイルはこのファイルからの位置で書く。
+const here = (path: string) => fileURLToPath(new URL(path, import.meta.url))
+
 export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
-  css: ['~/assets/css/app.css'],
+  css: [here('./assets/css/app.css')],
+
+  // UKARU ONLINE のサイトは別にビルドする
+  ignore: ['online/**'],
 
   app: {
     head: {
@@ -24,7 +33,7 @@ export default defineNuxtConfig({
   // アトミックデザイン用: サブディレクトリのプレフィックスなしでコンポーネントを参照する
   components: [
     {
-      path: '~/components',
+      path: here('./components'),
       pathPrefix: false,
     },
   ],
@@ -49,6 +58,12 @@ export default defineNuxtConfig({
         name: 'Outfit',
         provider: 'google',
         weights: [600, 700],
+      },
+      // ネパール語（デーヴァナーガリー）：UKARU ONLINE ページ。上の2つに字がないので、ここで出す
+      {
+        name: 'Noto Sans Devanagari',
+        provider: 'google',
+        weights: [400, 700],
       },
     ],
   },

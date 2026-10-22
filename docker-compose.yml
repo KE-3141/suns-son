@@ -12,3 +12,19 @@ services:
     environment:
       - NODE_ENV=development
       - HOST=0.0.0.0
+
+  # UKARU ONLINE（online/）。コーポレートと同じイメージで、別のポートで動かす
+  online:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["npm", "run", "dev:online"]
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/online/.nuxt
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0

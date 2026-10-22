@@ -12,7 +12,7 @@ const placementImageUrl = usePublicUrl('/images/placement.png')
 const languageTeacherUrl = usePublicUrl('/images/language_teacher.svg')
 const expertTeacherUrl = usePublicUrl('/images/expert_teacher.svg')
 
-const { company, educationActivities } = useSiteContent()
+const { company, siteUrls, educationActivities } = useSiteContent()
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const { company, educationActivities } = useSiteContent()
     <!-- ===== 1. ヒーロー ===== -->
     <PageHero
       illust="/images/illust/teacher.svg"
-      :parent="{ to: '/business/', label: '事業内容' }"
+      :parents="[{ to: '/business/', label: '事業内容' }]"
       title="教育"
       description="UKARU Academyが培ったネパール人への教育力が、質の高い人材輩出を支えています。"
     />
@@ -137,10 +137,10 @@ const { company, educationActivities } = useSiteContent()
       </div>
     </section>
 
-    <!-- ===== 5. オンラインクラス（左：画像、右：説明＋数字） ===== -->
+    <!-- ===== 5. オンラインクラス UKARU ONLINE（左：画像、右：説明＋くわしいページへ） ===== -->
     <section id="online" class="py-16 md:py-24 bg-white scroll-mt-20">
       <div class="max-w-6xl mx-auto px-6">
-        <SectionHeading title="日本在住ネパール人向けオンラインクラス" class="mb-10" />
+        <SectionHeading title="オンラインクラス「UKARU ONLINE」" class="mb-10" />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
           <!-- 左：画像 -->
@@ -153,22 +153,25 @@ const { company, educationActivities } = useSiteContent()
             />
           </div>
 
-          <!-- 右：説明＋数字 -->
+          <!-- 右：説明＋くわしいページへ -->
           <div class="order-1 md:order-2">
             <p class="text-text text-base leading-relaxed mb-6">
-              日本に在留しているネパール人向けに、オンラインクラスも開講しています。就労しながらでも学べる環境を整え、日本語力・実践的なコミュニケーション能力の底上げをサポートしています。
+              日本に住むネパール人向けのオンラインクラスです。仕事のあとの夜の時間に、家から受講できます。教科書・単語集・模擬問題はすべて自分たちで作ったオリジナル教材で、ネパール語で説明しながら授業を進めます。
             </p>
             <CheckList class="mb-8" :items="[
-              '日本在留中に就労しながら受講可能',
-              '初級から上級まで対応',
-              'JLPT対策・会話力強化を並行してサポート',
-              '入構希望者は今後も増加が見込まれる',
+              '日本語（JLPT N5〜N1）・ビジネス日本語（BJT）',
+              '介護福祉士 国家試験対策',
+              '特定技能 宿泊・建設（土木）の試験対策',
             ]" />
             <StatRow
+              class="mb-8"
               :stats="[
                 { value: '2000+', unit: '名', label: '累計受講者数' },
               ]"
             />
+            <AppButton :to="`${siteUrls.online}/`" variant="secondary">
+              UKARU ONLINE のクラスと教材を見る
+            </AppButton>
           </div>
         </div>
       </div>

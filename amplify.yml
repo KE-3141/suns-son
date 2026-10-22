@@ -9,6 +9,9 @@ frontend:
         - npm ci
     build:
       commands:
+        # Amplify は Nuxt を SSR とみなして aws-amplify の preset を当てる（出力先が .amplify-hosting になる）。
+        # 静的サイトとして出したいので static を明示する
+        - export NITRO_PRESET=static
         # nuxt generate が作る dist（.output/public への別名リンク）を消してから、出来上がりを dist に写す
         - if [ "$SITE" = "online" ]; then npm run generate:online && OUT=online/.output/public; else npm run build && OUT=.output/public; fi && rm -rf dist && cp -R "$OUT" dist
   artifacts:

@@ -762,6 +762,131 @@ export const useSiteContent = () => {
       '/images/illust/delivery.svg',
       '/images/illust/cleaner.svg',
     ],
+
+    /**
+     * 受講生のレビュー（トップの「受講生の声」）。
+     * 元は Google フォームの回答のスプレッドシート「UKARU 受講生レビュー（回答）」（シート「フォームの回答 1」）。
+     *   https://docs.google.com/spreadsheets/d/1Nv0CS_EdsouKvNjFnN_jU9nojqe88UnBpdJoJMPZqhE/edit
+     * 更新のしかた：シートを読み、掲載に同意した回答だけを新しい順に items へ写して、updated を読んだ日にする。
+     *   name：Nickname（入力のまま。前後の空白だけ取る）/ courses：現在勉強中の内容 / rating：星の数 / date：タイムスタンプの日付
+     *   text：感想は入力のまま（誤字も直さない）。絵文字だけ取る（サイトで絵文字を使わないため）
+     *   lang：text の言語（ne はローマ字のネパール語も含む）。ja：ネパール語の感想の日本語訳（日本語の感想には付けない）
+     *   face：吹き出しの顔（illustkit のキャラクターの顔。本人の顔ではない。前後で同じ顔が続かないように選ぶ）
+     *   感想の欄に感想が書かれていない回答（勉強中の内容をもう一度書いただけなど）は載せない
+     */
+    reviews: {
+      title: { ne: 'विद्यार्थीहरूको अनुभव', ja: '受講生の声' },
+      lead: {
+        ne: 'UKARU मा पढिरहेका विद्यार्थीहरूले लेखिदिनुभएको अनुभव, उहाँहरूकै शब्दमा।',
+        ja: 'UKARU で勉強している受講生が書いてくれた感想を、そのままの言葉で載せています。',
+      },
+      /** シートを読んだ日（StatRow の出典の時点） */
+      updated: '2026年10月23日',
+      /** 一覧の上に置く代表のお礼（CommentBubble） */
+      thanks: {
+        name: 'Rajan',
+        comment: { ne: 'सबैलाई, कमेन्ट लेखिदिनुभएकोमा धेरै धन्यवाद!', ja: 'みなさん、コメントありがとうございます！' },
+      },
+      items: [
+        {
+          name: 'Bandana karki',
+          face: '/images/illust/face_swona.svg',
+          courses: ['N2', 'BJT'],
+          rating: 5,
+          date: '2026-10-23',
+          lang: 'ja',
+          text: 'とても楽しく、明るい雰囲気のクラスです。先生も優しく、分かりやすく教えてくださるので、安心して楽しく勉強できます。これからもよろしくお願いします！',
+        },
+        {
+          name: 'Himani',
+          face: '/images/illust/face_sarita.svg',
+          courses: ['N1'],
+          rating: 5,
+          date: '2026-10-23',
+          lang: 'ja',
+          text: 'UKARUで日本語や介護について勉強しています。専門用語もネパール語で分かりやすく説明してもらえて、先生も優しいので、楽しく勉強できています。これからも頑張りたいです。',
+        },
+        {
+          name: 'NAVARAJ DAHAL',
+          face: '/images/illust/face_yamamoto.svg',
+          courses: ['N3'],
+          rating: 4,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'Ukaru ko service and instructor ramro hanunxha but afule samaya dina nasakeko le soche jati vako xaina .',
+          ja: 'UKARU のサービスと講師はいいです。でも自分が時間をとれなかったので、思っていたほどは進んでいません。',
+        },
+        {
+          name: 'Gautam prakash',
+          face: '/images/illust/face_nishikawa.svg',
+          courses: ['N2'],
+          rating: 4,
+          date: '2026-10-23',
+          lang: 'ja',
+          text: '説明がうまいですのでわかりやすい。\n職場で使う言葉や書類を読めるようになって、仕事を楽になってます。',
+        },
+        {
+          name: 'Jaggu prasad chaudhary',
+          face: '/images/illust/face_yamaguchi.svg',
+          courses: ['BJT'],
+          rating: 5,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'धेरै अनुभव भएको र हरेक समस्याको समाधान गर्न सक्ने क्षमतावान शिक्षक हुनुहुन्छ त्यसैले धेरै राम्रो लाग्यो ।\nर आफुमा पनि केहि आत्मविश्वास बढ्दै आएको छ ॥',
+          ja: '経験が豊富で、どんな問題も解決できる力のある先生なので、とてもよかったです。自分にも少しずつ自信がついてきました。',
+        },
+        {
+          name: 'Adhikari Padam',
+          face: '/images/illust/face_suzuki.svg',
+          courses: ['BJT'],
+          rating: 5,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'राम्रो लागेको छ ।',
+          ja: 'よかったです。',
+        },
+        {
+          name: 'Jamuna',
+          face: '/images/illust/face_swostika.svg',
+          courses: ['BJT', 'N2'],
+          rating: 5,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'Ramro6',
+          ja: 'よかったです。',
+        },
+        {
+          name: 'Bhumika',
+          face: '/images/illust/face_lin.svg',
+          courses: ['N2'],
+          rating: 4,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'एकदम राम्रो छ सेन्सेई रमाईलो हुनुहुन्छ सिकाउने तरीका धेरै राम्रो लाग्छ । राम्रो लागेकै कारण मैले ३ बर्श हुन लागीसक्यो पढीराखेको छु आफुमा पनी धेरै परीबर्तन आको छ सधै धन्यबाद छ',
+          ja: 'とてもいいです。先生は楽しくて、教え方がとてもいいと思います。いいと思ったので、もうすぐ3年になるほど勉強を続けています。自分もたくさん変わりました。いつも感謝しています。',
+        },
+        {
+          name: 'Chaudhari Elisha',
+          face: '/images/illust/face_tanaka.svg',
+          courses: ['N3'],
+          rating: 5,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'Hajur haru le sikaidinu vayeko ma dherai dherai dhanyavaad sensei \nAba afai le mehenat garnu parni ho sensei na bujeko ma sodxu sensei arigatougojaimasu sensei',
+          ja: '教えてくださって、本当にありがとうございます、先生。これからは自分でがんばらないといけません。わからないところは先生に聞きます。ありがとうございます、先生。',
+        },
+        {
+          name: 'Saraswati sapkota',
+          face: '/images/illust/face_sarita.svg',
+          courses: ['N5'],
+          rating: 4,
+          date: '2026-10-23',
+          lang: 'ne',
+          text: 'Ma paila hiragana katakana ni na aauni manxe ukaru class ma aaye paxi Mero\nPadhai ramro hudai gako xa',
+          ja: '前はひらがなもカタカナもできなかったのに、UKARU のクラスに来てから、勉強がどんどんよくなっています。',
+        },
+      ],
+    },
     /** トップの「UKARU とは」 */
     intro: {
       ne: 'UKARU ONLINE जापानमा बस्ने नेपालीहरूका लागि अनलाइन कक्षा हो। जापानी भाषा (JLPT・BJT) देखि कइगो फुकुशिशी र विशेष सीप (तोकुतेई गिनो) सम्म, जापानमा काम गर्न र बस्न चाहिने परीक्षाको तयारी नेपाली भाषामा गर्न सकिन्छ। कामपछि साँझ, घरबाटै पढ्न सकिन्छ।',

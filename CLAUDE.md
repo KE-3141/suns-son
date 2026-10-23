@@ -68,11 +68,12 @@ pages/          Nuxt の pages/ ディレクトリ
 | `BarList` | 横棒のグラフ（1系列だけ。primary の1色の細い棒、値は文字色で右に。`<table>` で組む。`note` に出典と時点） |
 | `AccordionItem` | 折りたたみ（`details`。丸い板のイラスト + h2 + 短い説明 + 右に + / −。罫線で区切る。`id` の `#id` で来たら開く。開閉の動きなし） |
 | `DocumentViewer` | 資料（PDF）を読むダイアログ（`dialog`。ページごとの画像を縦に並べて中でスクロール。`v-model:open`。Esc・背景・✕ で閉じる）。PDF はそのまま埋め込まず、ページを画像（webp）にして渡す（スマホで PDF を埋め込むと読めないため） |
+| `ReviewList` | 受講生のレビュー（1件ずつ `CommentBubble`。顔のイラスト（`face`。本人の顔ではない）+ 名前の横に星・勉強中の内容 + 吹き出しに感想を入力のまま。ネパール語の感想には `ja` で日本語訳を添える。md 以上は2段組み） |
 | `InfoTable` | 項目と内容の表（会社概要・許可番号など） |
 | `PointList` | 順序のない要点の一覧（左に見出し、右に説明。行を罫線で区切る。番号は付けない。`illust` で丸いイラスト。`link`（`to` / `href` + `label`）で説明の下に別ページへのボタン。`href` は新しいタブ） |
 | `CheckList` | 箇条書き（四角の小さな印） |
 | `SpeechBubble` | 代表の吹き出し（要所だけで使う） |
-| `CommentBubble` | 一言そえる吹き出し（UKARU の `c.comment`。丸い顔 + 名前 + 吹き出し。`faceSrc` は illustkit のキャラクターの顔（`/images/illust/face_<who>.svg`）。`side` は学習者が右・それ以外が左。`tone` は line / primary） |
+| `CommentBubble` | 一言そえる吹き出し（UKARU の `c.comment`。丸い顔 + 名前 + 吹き出し。`faceSrc` は illustkit のキャラクターの顔（`/images/illust/face_<who>.svg`）。`side` は学習者が右・それ以外が左。`tone` は line / primary。`#meta` スロットで名前の横に小さな情報） |
 | `RelatedLinks` | ページ下部の関連ページ誘導 |
 | `OnlineApplyButton` | UKARU ONLINE の受講申し込みボタン（Facebook のメッセージ。`note` で下の日本語の案内を出すか） |
 | `PageHero` | 内部ページ共通ヒーロー（淡い青背景 + パンくず + h1 + 説明文。`parents` で親ページを上の階層から順に、`#description` スロットで説明文の位置に自由な中身、`illust` で右にイラスト、`:breadcrumb="false"` でパンくずなし） |
@@ -314,6 +315,12 @@ UKARU ONLINE は別サイトとして `online/` に置く。ルート（コー�
 - 生徒の申し込みは Facebook のメッセージ（`OnlineApplyButton`）。企業向けは `RelatedLinks` でコーポレートサイトへ
 - ページ：トップ・クラス（`classes`。クラスごとに `AccordionItem` で折りたたみ、中に どんな試験（`ExamParts`）/ 数字（`StatRow`・`BarList`。合格率・勉強時間の目安）/ 資格までの流れ（`FlowSteps`）/ UKARU のクラス）・教師（`teachers`）・教材（`materials`。上に特長（`materialFeatures`。罫線の行で左に文・右に N5 第1課から写した図）、下にチラ見せ（代表の `CommentBubble` + JLPT の主教材・漢字・単語は N5 第1課だけを `DocumentViewer` で見せる。画像は `public/images/ukaru/materials/`。ほかの課は載せない。介護・特定技能の教材は載せない）・UKARU について（`about`）
 - 介護福祉士の専用のページは作らない（クラスのページの介護福祉士にまとめる。トップからは `/classes/#kaigo` で開いて見せる）
+- 受講生のレビューはトップの「受講生の声」（上に代表のお礼の吹き出し（`reviews.thanks`）と星の平均の `StatRow`、下に `ReviewList`）。データは `ukaruOnline.reviews`。
+  元は Google フォームの回答のシート「UKARU 受講生レビュー（回答）」
+  （https://docs.google.com/spreadsheets/d/1Nv0CS_EdsouKvNjFnN_jU9nojqe88UnBpdJoJMPZqhE/edit 。公開されていないので Google Sheets のコネクタで読む）。
+  「レビューを更新して」と言われたら、シートを読み直して `reviews.items`（新しい順）と `reviews.updated`（読んだ日）を書き換える。
+  載せるのは掲載に同意した回答だけ。感想は入力のまま（誤字も直さない。絵文字だけ取る）。ネパール語の感想には日本語訳（`ja`）を付ける。
+  感想が書かれていない回答は載せない
 - 先生の名前は社内の時間割にしか載っていないので、公開の OK をもらうまで載せない
 - コーポレートの旧 URL `/ukaru-online/` は Amplify のリダイレクトで online.suns-son.jp へ送る
 - サイトをまたぐリンクは `useSiteContent` の `siteUrls`（`corporate` / `online`）から作る。URL を直書きしない

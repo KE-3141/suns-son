@@ -12,14 +12,14 @@ const { ukaruOnline } = useSiteContent()
 const { leader } = ukaruOnline.about
 
 const jobRows = [
-  { key: 'top', jobs: [...ukaruOnline.heroJobs].reverse(), position: 'top-6', motion: 'motion-safe:animate-marquee-reverse', size: 'h-32 md:h-40' },
-  { key: 'bottom', jobs: ukaruOnline.heroJobs, position: 'bottom-0', motion: 'motion-safe:animate-marquee', size: 'h-40 md:h-56' },
+  { key: 'top', jobs: [...ukaruOnline.heroJobs].reverse(), position: 'top-4', motion: 'motion-safe:animate-marquee-reverse', size: 'h-20 md:h-24' },
+  { key: 'bottom', jobs: ukaruOnline.heroJobs, position: 'bottom-0', motion: 'motion-safe:animate-marquee', size: 'h-32 md:h-36' },
 ]
 </script>
 
 <template>
-  <!-- 上の pt・下の pb は職業の列の高さ。文字と代表は2列の間に置き、代表は文字と高さの中央をそろえる（スマホでは代表を下の列の前に立たせる） -->
-  <section class="relative bg-white overflow-hidden flex items-end min-h-[calc(100svh-4rem)] pb-40 md:pb-56">
+  <!-- 上の pt・下の pb は職業の列の高さ。文字は2列の間に置き、代表は下の列の前に立たせる（高さは中身に合わせる。ノートPCの画面の高さに収まるように） -->
+  <section class="relative bg-white overflow-hidden pb-36 md:pb-40">
     <!-- 背景：職業のイラストの列（飾りなので読み上げない） -->
     <div
       v-for="row in jobRows"
@@ -40,7 +40,7 @@ const jobRows = [
       </div>
     </div>
 
-    <div class="relative w-full max-w-6xl mx-auto px-6 pt-48 md:pt-60 md:grid md:grid-cols-12 md:gap-10 md:items-center">
+    <div class="relative w-full max-w-6xl mx-auto px-6 pt-28 md:grid md:grid-cols-12 md:gap-10 md:items-end">
       <div class="md:col-span-8">
         <h1 v-reveal="200" class="font-black leading-snug tracking-tight text-text mb-6">
           <span lang="ne" class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug">{{ ukaruOnline.hero.title.ne }}</span>
@@ -63,7 +63,7 @@ const jobRows = [
           src="/images/illust/rajan_fist_pump.png"
           :alt="`UKARU 代表 ${leader.name.ja}`"
           eager
-          class="h-64 md:h-96 lg:h-112 w-auto -mb-40 md:mb-0"
+          class="h-56 md:h-88 lg:h-96 w-auto -mb-28 md:-mb-32"
         />
       </div>
     </div>

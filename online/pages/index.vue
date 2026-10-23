@@ -6,7 +6,17 @@ useSeoMeta({
 })
 
 const { ukaruOnline } = useSiteContent()
-const { kaigo } = ukaruOnline
+const { kaigo, reviews } = ukaruOnline
+
+/** 受講生の声の数字（星の平均・件数）。出典はレビューのシートと読んだ日 */
+const reviewStats = computed(() => {
+  const average = reviews.items.reduce((sum, review) => sum + review.rating, 0) / reviews.items.length
+  return [
+    { value: average.toFixed(1), unit: '/ 5', label: 'औसत तारा / 星の平均' },
+    { value: String(reviews.items.length), unit: '件', label: 'समीक्षा / レビュー' },
+  ]
+})
+const reviewNote = `出典：UKARU 受講生レビュー（Google フォーム。${reviews.updated} 時点。掲載に同意した回答）`
 const logoMarkUrl = usePublicUrl('/images/ukaru/ukaru_mark.svg')
 </script>
 
@@ -43,7 +53,22 @@ const logoMarkUrl = usePublicUrl('/images/ukaru/ukaru_mark.svg')
       </div>
     </section>
 
-    <!-- ===== 4. クラス（教科の名前だけ。くわしくはクラスのページ） ===== -->
+    <!-- ===== 4. 受講生の声 ===== -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <SectionHeading :title="reviews.title" class="mb-8" />
+        <BilingualText :text="reviews.lead" class="text-base md:text-lg leading-relaxed max-w-3xl mb-8" />
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 md:items-center mb-10 md:mb-12">
+          <CommentBubble :name="reviews.thanks.name" face-src="/images/illust/face_rajan.svg" tone="primary" class="md:col-span-7">
+            <BilingualText :text="reviews.thanks.comment" class="font-bold" />
+          </CommentBubble>
+          <StatRow :stats="reviewStats" :note="reviewNote" class="md:col-span-5" />
+        </div>
+        <ReviewList :items="reviews.items" />
+      </div>
+    </section>
+
+    <!-- ===== 5. クラス（教科の名前だけ。くわしくはクラスのページ） ===== -->
     <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6">
         <SectionHeading :title="{ ne: 'कक्षाहरू', ja: 'クラス' }" class="mb-6" />
@@ -68,7 +93,7 @@ const logoMarkUrl = usePublicUrl('/images/ukaru/ukaru_mark.svg')
       </div>
     </section>
 
-    <!-- ===== 5. 介護福祉士（次の試験の日。くわしくはクラスのページの介護福祉士を開いて見せる） ===== -->
+    <!-- ===== 6. 介護福祉士（次の試験の日。くわしくはクラスのページの介護福祉士を開いて見せる） ===== -->
     <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6 md:grid md:grid-cols-12 md:gap-10 md:items-end">
         <div class="md:col-span-8">
@@ -86,7 +111,7 @@ const logoMarkUrl = usePublicUrl('/images/ukaru/ukaru_mark.svg')
       </div>
     </section>
 
-    <!-- ===== 6. オリジナル教材 ===== -->
+    <!-- ===== 7. オリジナル教材 ===== -->
     <section class="py-16 md:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-6">
         <SectionHeading :title="{ ne: 'हाम्रो आफ्नै पाठ्यसामग्री', ja: 'オリジナル教材' }" class="mb-6" />
